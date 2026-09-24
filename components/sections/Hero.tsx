@@ -13,7 +13,7 @@ export default function Hero() {
     >
       <div className="hero-copy">
         <p className="eyebrow">
-          Développement informatique · Recherche d’alternance
+          Développement informatique
         </p>
         <h1 id="hero-title">
           <span className="hero-name-line">Joel</span>{" "}
@@ -21,9 +21,14 @@ export default function Hero() {
             Lopes Ribeiro<span className="accent">.</span>
           </span>
         </h1>
-        <p className="hero-objective">
-          {profile.objective} {profile.rhythm}
+        <p className="hero-role">Developer — Data &amp; AI</p>
+        <p className="hero-intro">
+          Du développement informatique à la donnée et à l’intelligence artificielle.
         </p>
+        <div className="hero-availability">
+          <p>Recherche d’alternance · Janvier 2027 · 1 à 3 ans</p>
+          <p>{profile.rhythm}</p>
+        </div>
         <p className="location">{profile.location}</p>
         <div className="actions">
           <a className="button" href="#contact">

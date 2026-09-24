@@ -6,6 +6,7 @@ import "./globals.css";
 import "./animations.css";
 import "./skills.css";
 import "./languages.css";
+import "./refinements.css";
 import ScrollCompanion from "@/components/ui/ScrollCompanion";
 export const metadata: Metadata = {
   title: "Joel Lopes Ribeiro | Portfolio",
