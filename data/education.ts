@@ -53,7 +53,7 @@ export const education: Education[] = [
       "J’ai initialement suivi un parcours en DCG, orienté vers la comptabilité, la finance, la fiscalité et la gestion d’entreprise. À l’issue de ce parcours, j’ai obtenu une équivalence de BTS Comptabilité et Gestion, venant valider les compétences acquises au cours de ma formation.",
     ],
     details: [
-      "Comptabilité générale",
+      "Comptabilité générale et Léa je t'aime <3",
       "Comptabilité analytique",
       "Gestion financière",
       "Fiscalité",
