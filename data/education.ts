@@ -1,0 +1,92 @@
+import type { Education } from "@/types";
+
+export const education: Education[] = [
+  {
+    degree: "Master of Science — Big Data & Intelligence Artificielle",
+    institution: "EPITECH Strasbourg",
+    period: "2027 – 2029",
+    status: "Parcours à venir",
+    description: [
+      "Dans la continuité de ma Pré-MSc, je poursuivrai mon parcours au sein du Master of Science Big Data & Intelligence Artificielle d’EPITECH Strasbourg.",
+      "Cette formation me permettra d’approfondir mes compétences en data, intelligence artificielle, infrastructures cloud et traitement de données à grande échelle, avec une approche orientée vers des problématiques concrètes d’entreprise.",
+    ],
+    details: [
+      "Big Data",
+      "Data streaming",
+      "Hadoop",
+      "Apache Spark",
+      "Infrastructures cloud",
+      "Traitement de grandes quantités de données",
+      "Sécurisation des données",
+      "Visualisation de données",
+      "Analyse et interprétation de données complexes",
+      "Intelligence artificielle",
+    ],
+  },
+  {
+    degree: "Pré-MSc — Parcours Master of Science",
+    institution: "EPITECH Strasbourg",
+    period: "2026 – 2027",
+    description: [
+      "Année préparatoire au parcours Master of Science d’EPITECH, conçue pour renforcer les fondamentaux en développement informatique avant une spécialisation en Big Data & Intelligence Artificielle.",
+    ],
+    details: [
+      "Python",
+      "JavaScript / TypeScript",
+      "Développement web",
+      "APIs REST",
+      "SQL & bases de données",
+      "Git & GitHub",
+      "Linux / Bash",
+      "Programmation orientée objet",
+      "CI/CD",
+      "Architecture applicative",
+      "Algorithmique",
+      "Méthodes Agile",
+    ],
+  },
+  {
+    degree: "DCG / BTS Comptabilité et Gestion",
+    institution: "ESGM Pro Format / Pigier Mulhouse",
+    period: "2024 – 2026",
+    description: [
+      "J’ai initialement suivi un parcours en DCG, orienté vers la comptabilité, la finance, la fiscalité et la gestion d’entreprise. À l’issue de ce parcours, j’ai obtenu une équivalence de BTS Comptabilité et Gestion, venant valider les compétences acquises au cours de ma formation.",
+    ],
+    details: [
+      "Comptabilité générale",
+      "Comptabilité analytique",
+      "Gestion financière",
+      "Fiscalité",
+      "Excel avancé",
+      "PGI",
+      "Analyse de données",
+      "Structuration de données",
+      "Optimisation de processus",
+    ],
+  },
+  {
+    degree: "Licence Administration Économique et Sociale",
+    institution: "Université de Strasbourg",
+    period: "2021 – 2023",
+    description: [
+      "Formation pluridisciplinaire mêlant économie, droit, gestion et méthodes quantitatives, qui m’a permis d’acquérir une compréhension globale du fonctionnement des organisations et de leur environnement économique.",
+    ],
+    details: [
+      "Économie & macroéconomie",
+      "Gestion",
+      "Comptabilité d’entreprise",
+      "Droit privé",
+      "Droit public",
+      "Relations internationales",
+      "Méthodes quantitatives",
+      "Analyse économique",
+    ],
+  },
+  {
+    degree: "Baccalauréat général",
+    institution: "Lycée Jean Mermoz — Saint-Louis",
+    period: "2020 – 2021",
+    description: ["Baccalauréat général obtenu avec mention."],
+    details: [],
+  },
+];

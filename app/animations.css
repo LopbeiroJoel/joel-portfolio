@@ -1,0 +1,263 @@
+/* Micro-interactions : séparées des styles de structure. */
+.about-prose {
+  max-width: 85ch;
+}
+.entry-summary {
+  color: var(--color-text-secondary);
+}
+.list-heading {
+  margin: 1.5rem 0 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.interest-card {
+  position: relative;
+  padding-right: 6.5rem;
+}
+.interest-art {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  width: 56px;
+  height: 64px;
+  color: var(--color-primary);
+  opacity: 0;
+  transform: translateY(-40%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+.interest-card:hover .interest-art,
+.interest-card:focus-visible .interest-art {
+  opacity: 0.8;
+  transform: translateY(-50%);
+}
+.playing-cards span {
+  position: absolute;
+  top: 9px;
+  left: 4px;
+  width: 33px;
+  height: 47px;
+  border: 1px solid var(--color-primary-light);
+  border-radius: 4px;
+  background: var(--color-background-alt);
+  font:
+    600 0.8rem/1.15 Georgia,
+    serif;
+  padding: 4px;
+  transform-origin: 50% 100%;
+  transition: transform 0.35s ease;
+}
+.playing-cards span + span {
+  left: 16px;
+  color: #914b49;
+}
+.interest-card:hover .playing-cards span:first-child,
+.interest-card:focus-visible .playing-cards span:first-child {
+  transform: rotate(-17deg) translateY(-3px);
+}
+.interest-card:hover .playing-cards span + span,
+.interest-card:focus-visible .playing-cards span + span {
+  transform: rotate(15deg);
+}
+.sport-art {
+  width: 56px;
+  height: 64px;
+  transform-origin: center bottom;
+}
+.interest-card:hover .sport-art,
+.interest-card:focus-visible .sport-art {
+  animation: sport-bounce 0.6s ease 2;
+}
+@keyframes sport-bounce {
+  50% {
+    transform: translateY(-5px) rotate(-5deg);
+  }
+}
+
+/* Personnage de 20 pixels, sur les bordures des cartes et séparateurs, sans bloquer les clics. */
+.scroll-companion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 5;
+  color: var(--color-primary);
+  opacity: 0.6;
+  contain: layout style;
+}
+.scroll-companion[hidden] {
+  display: none;
+}
+.scroll-companion svg {
+  display: block;
+  overflow: visible;
+}
+/* Chaque pose garde un pied (ou le bassin assis) sur y=29. */
+.pixel-arm-left,
+.pixel-arm-right {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+.pixel-seated,
+.pixel-step-a,
+.pixel-step-b {
+  display: none;
+}
+[data-pose="walk"] .pixel-legs-rest {
+  display: none;
+}
+[data-pose="walk"] .pixel-step-a,
+[data-pose="walk"] .pixel-step-b {
+  display: block;
+}
+[data-pose="walk"] .pixel-step-a {
+  animation: planted-step 0.64s steps(1, end) infinite;
+}
+[data-pose="walk"] .pixel-step-b {
+  animation: planted-step 0.64s steps(1, end) -0.32s infinite;
+}
+[data-pose="walk"] .pixel-arm-right {
+  animation: pixel-arm 0.32s steps(2, end) infinite alternate;
+}
+[data-pose="walk"] .pixel-arm-left {
+  animation: pixel-arm 0.32s steps(2, end) infinite alternate-reverse;
+}
+[data-pose="sit"] .pixel-standing {
+  display: none;
+}
+[data-pose="sit"] .pixel-seated {
+  display: block;
+}
+@keyframes planted-step {
+  0% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pixel-arm {
+  from {
+    transform: rotate(-20deg);
+  }
+  to {
+    transform: rotate(20deg);
+  }
+}
+@media (max-width: 420px) {
+  .interest-card {
+    padding-right: 5.5rem;
+  }
+  .interest-art {
+    right: 0.65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-companion {
+    display: none !important;
+  }
+  .interest-art,
+  .playing-cards span {
+    transition: none;
+  }
+  .interest-card .sport-art {
+    animation: none !important;
+  }
+}
+
+/* Portrait fourni : cadrage original, verre léger limité au cadre. */
+.hero .profile-panel {
+  width: 196px;
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 12px 32px rgba(28, 28, 30, 0.07),
+    inset 0 0 0 1px rgba(54, 92, 73, 0.07);
+  backdrop-filter: blur(12px);
+}
+.hero .profile-photo {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 17px;
+  object-fit: contain;
+}
+@media (min-width: 900px) {
+  .hero .profile-panel {
+    width: 272px;
+    justify-self: center;
+  }
+}
+
+/* Deux lignes, proportionnelles à la largeur réelle de la colonne. */
+.hero-copy {
+  min-width: 0;
+  container-type: inline-size;
+}
+#hero-title {
+  font-size: clamp(2rem, 12cqi, 5.5rem);
+  line-height: 1.08;
+}
+.hero-name-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Chute exceptionnelle : seulement pendant un scroll descendant très rapide. */
+[data-pose="fall"] .pixel-arm-left {
+  animation: falling-arm 0.16s steps(2, end) infinite alternate;
+}
+[data-pose="fall"] .pixel-arm-right {
+  animation: falling-arm 0.16s steps(2, end) infinite alternate-reverse;
+}
+[data-pose="fall"] .pixel-legs-rest {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: falling-legs 0.18s steps(2, end) infinite alternate;
+}
+@keyframes falling-arm {
+  from {
+    transform: rotate(-80deg);
+  }
+  to {
+    transform: rotate(60deg);
+  }
+}
+@keyframes falling-legs {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+/* Impulsion et réception comprimées autour du pied, trajectoire gérée en JS. */
+[data-pose="impulse"] .pixel-standing,
+[data-pose="land"] .pixel-standing {
+  transform-origin: 10px 29px;
+  transform: scale(1.08, 0.88);
+}
+[data-pose="jump"] .pixel-arm-left {
+  transform: rotate(55deg);
+}
+[data-pose="jump"] .pixel-arm-right {
+  transform: rotate(-55deg);
+}
+[data-pose="jump"] .pixel-legs-rest {
+  transform-origin: 10px 21px;
+  transform: scaleY(0.72);
+}
+[data-pose="descend"] .pixel-arm-left {
+  transform: rotate(25deg);
+}
+[data-pose="descend"] .pixel-arm-right {
+  transform: rotate(-25deg);
+}
