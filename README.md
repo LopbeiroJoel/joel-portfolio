@@ -88,3 +88,10 @@ La chute du personnage est isolée dans `lib/companion-fall.ts`. Elle nécessite
 Validation complémentaire : 17 cartes de compétences (dont 7 catégories à venir), 4 cartes Langues, survol et focus clavier, défilement lent, chute rapide, retour sur une bordure, cooldown et annulation en mode réduction des animations testés dans le navigateur.
 
 Les sauts ordinaires sont limités aux supports proches (135 px plus bas, 80 px plus haut, 110 px horizontalement). La trajectoire suit les bordures pendant le scroll, avec impulsion, vol, réception et reprise depuis le point exact de contact. Les grands espaces ne sont pas franchis par des bonds démesurés : le personnage accompagne son support hors écran puis réapparaît discrètement sur un support entrant. La chute spéciale reste réservée au scroll très rapide.
+
+
+## Interaction cachée du personnage
+
+Seul son bouton reçoit les clics (également activable au clavier). Premier clic : « Aïe ». Deuxième : « Arrête, ça fait mal ». Troisième : « Ok... », puis « Tu veux jouer ? » après 900 ms, puis prise d’élan et départ après 2,3 s. Il marche réellement sur son support avant un saut qui sort entièrement de l’écran ; il reste absent jusqu’au rechargement. La réduction des animations annule la séquence.
+
+La logique est isolée dans `lib/companion-clicks.ts`. La police pixel Tiny5 est embarquée localement avec sa licence OFL dans `public/fonts/` (source : https://github.com/google/fonts/tree/main/ofl/tiny5). Aucun appel à un fournisseur de polices n’est effectué par le site.

@@ -3,15 +3,24 @@
 import { useEffect, useRef } from "react";
 import { createCompanionFall } from "@/lib/companion-fall";
 import { createCompanionJump } from "@/lib/companion-jump";
+import {
+  createCompanionClicks,
+  type CompanionClickState,
+} from "@/lib/companion-clicks";
 
 type Support = { element: HTMLElement; edge: "top" | "bottom" };
 
 export default function ScrollCompanion() {
   const companionRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const captionRef = useRef<HTMLSpanElement>(null);
+  const clickState = useRef<CompanionClickState>({ count: 0, departed: false });
   useEffect(() => {
     const element = companionRef.current;
-    if (!element) return;
+    if (!element || !buttonRef.current || !captionRef.current) return;
     const sprite = element;
+    const button = buttonRef.current;
+    const caption = captionRef.current;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let dispose = () => {};
 
@@ -19,7 +28,7 @@ export default function ScrollCompanion() {
       dispose();
       sprite.hidden = true;
       sprite.style.removeProperty("opacity");
-      if (motion.matches) return;
+      if (motion.matches || clickState.current.departed) return;
       const elements = Array.from(
         document.querySelectorAll<HTMLElement>("main .section, main .card"),
       );
@@ -53,6 +62,21 @@ export default function ScrollCompanion() {
         measure(true);
       });
 
+      const clicks = createCompanionClicks({
+        sprite,
+        button,
+        caption,
+        state: clickState.current,
+        isSettled: () => !jump.isActive() && !fall.isActive() && !!support,
+        surface: () => (support ? surface(support) : undefined),
+        pause: () => {
+          jump.cancel();
+          fall.dispose();
+          cancelAnimationFrame(frame);
+          frame = 0;
+        },
+      });
+
       function surface(item: Support) {
         const rect = item.element.getBoundingClientRect();
         return {
@@ -74,7 +98,8 @@ export default function ScrollCompanion() {
         sprite.dataset.supportEdge = item.edge;
       }
       function paint(now: number) {
-        if (!support || fall.isActive() || jump.isActive()) return;
+        if (!support || clicks.isBusy() || fall.isActive() || jump.isActive())
+          return;
         const elapsed = previousFrame ? Math.min(now - previousFrame, 48) : 16;
         previousFrame = now;
         const walking = now - lastScroll < 700;
@@ -144,7 +169,7 @@ export default function ScrollCompanion() {
       }
 
       function measure(isScroll: boolean) {
-        if (fall.isActive() || jump.isActive()) return;
+        if (clicks.isBusy() || fall.isActive() || jump.isActive()) return;
         const now = performance.now();
         if (isScroll) lastScroll = now;
         const headerBottom =
@@ -228,6 +253,7 @@ export default function ScrollCompanion() {
       }
 
       const onScroll = () => {
+        if (clicks.isBusy()) return;
         const delta = window.scrollY - previousScroll;
         if (delta) scrollDirection = Math.sign(delta);
         previousScroll = window.scrollY;
@@ -255,6 +281,7 @@ export default function ScrollCompanion() {
       window.addEventListener("resize", onResize);
       measure(false);
       dispose = () => {
+        clicks.dispose();
         jump.cancel();
         fall.dispose();
         cancelAnimationFrame(frame);
@@ -276,41 +303,57 @@ export default function ScrollCompanion() {
   }, []);
 
   return (
-    <div
-      ref={companionRef}
-      className="scroll-companion"
-      aria-hidden="true"
-      hidden
-      data-pose="idle"
-    >
-      <svg
-        viewBox="0 0 20 30"
-        width="20"
-        height="30"
-        shapeRendering="crispEdges"
-        fill="currentColor"
+    <>
+      <div
+        ref={companionRef}
+        className="scroll-companion"
+        hidden
+        data-pose="idle"
       >
-        <g className="pixel-standing">
-          <path d="M7 1h6v2h2v6h-2v2H7V9H5V3h2zM9 12h3v9H9z" />
-          <path className="pixel-arm-left" d="M6 13h3v3H6v4H3v-3h3z" />
-          <path className="pixel-arm-right" d="M12 13h3v4h3v3h-3v-4h-3z" />
-          <path
-            className="pixel-legs-rest"
-            d="M7 21h4v4H8v4H4v-3h3zM11 21h3v5h3v3h-5v-4h-1z"
-          />
-          <path
-            className="pixel-step-a"
-            d="M8 21h3v8H5v-3h3zM11 21h4v3h3v3h-5v-3h-2z"
-          />
-          <path
-            className="pixel-step-b"
-            d="M11 21h3v5h3v3h-6zM7 21h4v3H8v3H3v-3h4z"
-          />
-        </g>
-        <g className="pixel-seated">
-          <path d="M7 9h6v2h2v6h-2v2H7v-2H5v-6h2zM9 20h3v7h4v2H8v-2H7v-6h2zM5 21h2v8H4v-2h1zM14 29h3v5h3v2h-6z" />
-        </g>
-      </svg>
-    </div>
+        <button
+          ref={buttonRef}
+          type="button"
+          className="companion-hitbox"
+          aria-label="Interagir avec le personnage"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 30"
+            width="20"
+            height="30"
+            shapeRendering="crispEdges"
+            fill="currentColor"
+          >
+            <g className="pixel-standing">
+              <path d="M7 1h6v2h2v6h-2v2H7V9H5V3h2zM9 12h3v9H9z" />
+              <path className="pixel-arm-left" d="M6 13h3v3H6v4H3v-3h3z" />
+              <path className="pixel-arm-right" d="M12 13h3v4h3v3h-3v-4h-3z" />
+              <path
+                className="pixel-legs-rest"
+                d="M7 21h4v4H8v4H4v-3h3zM11 21h3v5h3v3h-5v-4h-1z"
+              />
+              <path
+                className="pixel-step-a"
+                d="M8 21h3v8H5v-3h3zM11 21h4v3h3v3h-5v-3h-2z"
+              />
+              <path
+                className="pixel-step-b"
+                d="M11 21h3v5h3v3h-6zM7 21h4v3H8v3H3v-3h4z"
+              />
+            </g>
+            <g className="pixel-seated">
+              <path d="M7 9h6v2h2v6h-2v2H7v-2H5v-6h2zM9 20h3v7h4v2H8v-2H7v-6h2zM5 21h2v8H4v-2h1zM14 29h3v5h3v2h-6z" />
+            </g>
+          </svg>
+        </button>
+      </div>
+      <span
+        ref={captionRef}
+        className="companion-caption"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      />
+    </>
   );
 }

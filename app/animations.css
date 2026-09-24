@@ -261,3 +261,63 @@
 [data-pose="descend"] .pixel-arm-right {
   transform: rotate(-25deg);
 }
+
+/* Interaction ciblée : seul le petit bouton du personnage reçoit les clics. */
+@font-face {
+  font-family: "Tiny5";
+  src: url("/fonts/Tiny5-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.companion-hitbox {
+  display: block;
+  width: 20px;
+  height: 36px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.companion-hitbox:disabled {
+  cursor: default;
+}
+.companion-hitbox:focus-visible {
+  outline: 1px dotted var(--color-primary);
+  outline-offset: 3px;
+}
+.companion-caption {
+  position: fixed;
+  z-index: 6;
+  pointer-events: none;
+  color: var(--color-primary);
+  background: none;
+  border: 0;
+  font-family: "Tiny5", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+}
+.scroll-companion:is([data-interaction="runup"], [data-interaction="run"])
+  .pixel-step-a,
+.scroll-companion:is([data-interaction="runup"], [data-interaction="run"])
+  .pixel-step-b {
+  animation-duration: 0.3s;
+}
+.scroll-companion:is([data-interaction="runup"], [data-interaction="run"])
+  .pixel-arm-left,
+.scroll-companion:is([data-interaction="runup"], [data-interaction="run"])
+  .pixel-arm-right {
+  animation-duration: 0.15s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .companion-caption {
+    display: none;
+  }
+}
