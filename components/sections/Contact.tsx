@@ -36,6 +36,15 @@ export default function Contact() {
               </li>
             ))}
           </ul>
+          <div className="actions">
+            <a
+              className="button button-secondary"
+              href={profile.cvPath}
+              download="CV-Joel-Lopes-Ribeiro.pdf"
+            >
+              {t("Télécharger mon CV")}<small aria-hidden="true">PDF ↓</small>
+            </a>
+          </div>
         </div>
         <ContactForm />
       </div>
