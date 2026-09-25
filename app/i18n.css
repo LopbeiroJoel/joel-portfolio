@@ -1,4 +1,17 @@
 .header-tools { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
+.header-tools .nav-links a {
+  padding: 10px 12px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.header-tools .nav-links a[aria-current="location"] {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+@media (min-width: 1200px) {
+  .header-tools .nav-links { gap: 8px; }
+}
 .locale-selector { display: flex; align-items: center; flex-shrink: 0; gap: 4px; }
 .locale-selector button {
   position: relative;

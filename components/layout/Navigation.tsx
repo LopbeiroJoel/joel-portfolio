@@ -1,6 +1,11 @@
 "use client";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { useRef, useState } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
+function subscribeToSection(callback: () => void) {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
+}
+const readSection = () => window.location.hash.slice(1) || "home";
 const links = [
   ["home", "Accueil"],
   ["about", "À propos"],
@@ -13,6 +18,7 @@ const links = [
 export default function Navigation() {
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
+  const selectedSection = useSyncExternalStore(subscribeToSection, readSection, () => "home");
   const buttonRef = useRef<HTMLButtonElement>(null);
   return (
     <nav
@@ -39,6 +45,7 @@ export default function Navigation() {
           <li key={id}>
             <a
               href={`#${id}`}
+              aria-current={selectedSection === id ? "location" : undefined}
               onClick={() => {
                 setOpen(false);
                 document.getElementById(id)?.focus({ preventScroll: true });

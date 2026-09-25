@@ -33,7 +33,7 @@ export default function HeroContent({ hasPhoto, hasCV }: { hasPhoto: boolean; ha
             <a
               className="button button-secondary"
               href={profile.cvPath}
-              download="CV-Joel-Lopes-Ribeiro.pdf"
+              download="CV_JOEL_LOPESRIBEIRO.pdf"
             >{t("Télécharger mon CV")}<small aria-hidden="true">PDF ↓</small></a>
           )}
         </div>
