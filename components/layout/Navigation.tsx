@@ -1,4 +1,5 @@
 "use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useRef, useState } from "react";
 const links = [
   ["home", "Accueil"],
@@ -10,11 +11,12 @@ const links = [
   ["contact", "Contact"],
 ];
 export default function Navigation() {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   return (
     <nav
-      aria-label="Navigation principale"
+      aria-label={t("Navigation principale")}
       onKeyDown={(event) => {
         if (event.key === "Escape" && open) {
           setOpen(false);
@@ -30,7 +32,7 @@ export default function Navigation() {
         aria-controls="main-navigation"
         onClick={() => setOpen(!open)}
       >
-        {open ? "Fermer le menu" : "Ouvrir le menu"}
+        {t(open ? "Fermer le menu" : "Ouvrir le menu")}
       </button>
       <ul id="main-navigation" className={`nav-links${open ? " is-open" : ""}`}>
         {links.map(([id, label]) => (
@@ -42,7 +44,7 @@ export default function Navigation() {
                 document.getElementById(id)?.focus({ preventScroll: true });
               }}
             >
-              {label}
+              {t(label)}
             </a>
           </li>
         ))}

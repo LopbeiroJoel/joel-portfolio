@@ -1,4 +1,5 @@
 "use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useState, type FormEvent } from "react";
 type Field = "name" | "email" | "subject" | "message";
 const fields: { name: Field; label: string; maxLength: number }[] = [
@@ -8,6 +9,7 @@ const fields: { name: Field; label: string; maxLength: number }[] = [
   { name: "message", label: "Message", maxLength: 5000 },
 ];
 export default function ContactForm() {
+  const { t } = useLocale();
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [submitted, setSubmitted] = useState(false);
   function submit(event: FormEvent<HTMLFormElement>) {
@@ -43,14 +45,10 @@ export default function ContactForm() {
       noValidate
       aria-describedby="form-notice"
     >
-      <p id="form-notice" className="form-notice">
-        Formulaire de démonstration : aucun email ne sera envoyé. Pour me
-        joindre, utilisez directement mon adresse email ou mon téléphone. Tous
-        les champs sont obligatoires.
-      </p>
+      <p id="form-notice" className="form-notice">{t("Formulaire de démonstration : aucun email ne sera envoyé. Pour me joindre, utilisez directement mon adresse email ou mon téléphone. Tous les champs sont obligatoires.")}</p>
       {fields.map((field) => (
         <div className="field" key={field.name}>
-          <label htmlFor={`contact-${field.name}`}>{field.label}</label>
+          <label htmlFor={`contact-${field.name}`}>{t(field.label)}</label>
           {field.name === "message" ? (
             <textarea
               id={`contact-${field.name}`}
@@ -85,20 +83,15 @@ export default function ContactForm() {
           )}
           {errors[field.name] && (
             <p className="error" id={`${field.name}-error`}>
-              {errors[field.name]}
+              {t(errors[field.name] ?? "")}
             </p>
           )}
         </div>
       ))}
-      <button type="submit" className="button">
-        Simuler l’envoi
-      </button>
+      <button type="submit" className="button">{t("Simuler l’envoi")}</button>
       <div role="status" aria-live="polite">
         {submitted && (
-          <p className="success">
-            Simulation réussie pour cette V1. Aucun email n’a été envoyé et
-            aucune donnée n’a été enregistrée.
-          </p>
+          <p className="success">{t("Simulation réussie pour cette V1. Aucun email n’a été envoyé et aucune donnée n’a été enregistrée.")}</p>
         )}
       </div>
     </form>

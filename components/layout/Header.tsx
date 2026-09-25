@@ -1,16 +1,19 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import LanguageSelector from "@/components/i18n/LanguageSelector";
 import Navigation from "./Navigation";
 export default function Header() {
+  const { t } = useLocale();
   return (
     <header className="site-header">
       <div className="container header-inner">
         <a
           className="wordmark"
           href="#home"
-          aria-label="Joel Lopes Ribeiro — Accueil"
-        >
-          JLR<span aria-hidden="true">.</span>
+          aria-label={t("Joel Lopes Ribeiro — Accueil")}
+        >{t("JLR")}<span aria-hidden="true">{t(".")}</span>
         </a>
-        <Navigation />
+        <div className="header-tools"><Navigation /><LanguageSelector /></div>
       </div>
     </header>
   );

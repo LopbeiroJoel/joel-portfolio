@@ -1,3 +1,6 @@
+import LocaleProvider from "@/components/i18n/LocaleProvider";
+import SkipLink from "@/components/i18n/SkipLink";
+import "./i18n.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Header from "@/components/layout/Header";
@@ -18,13 +21,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
       <body>
-        <a className="skip-link" href="#main-content">
-          Aller au contenu principal
-        </a>
+        <LocaleProvider>
+        <SkipLink />
         <Header />
         {children}
         <Footer />
         <ScrollCompanion />
+      </LocaleProvider>
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import { translate } from "@/lib/i18n";
 export type CompanionClickState = { count: number; departed: boolean };
 type Surface = { left: number; right: number; y: number };
 type Options = {
@@ -65,7 +66,9 @@ export function createCompanionClicks({
     clearTimeout(textTimer);
     timers.delete(textTimer);
     fade?.cancel();
-    caption.textContent = text;
+    caption.dataset.message = text;
+    const language = document.documentElement.lang;
+    caption.textContent = translate(language.startsWith("pt") ? "pt" : language === "en" ? "en" : "fr", text);
     caption.style.visibility = "visible";
     fade = caption.animate([{ opacity: 0 }, { opacity: 1 }], {
       duration: 160,

@@ -1,6 +1,9 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { interests } from "@/data/interests";
 export default function Interests() {
+  const { t } = useLocale();
   return (
     <section aria-labelledby="interests-title" className="section container">
       <SectionHeading
@@ -15,8 +18,8 @@ export default function Interests() {
             key={interest.name}
             tabIndex={0}
           >
-            <h3>{interest.name}</h3>
-            <p className="muted">{interest.description}</p>
+            <h3>{t(interest.name)}</h3>
+            <p className="muted">{t(interest.description)}</p>
             <div className="interest-art" aria-hidden="true">
               {interest.name === "Poker" ? (
                 <div className="playing-cards">

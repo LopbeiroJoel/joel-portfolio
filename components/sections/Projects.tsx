@@ -1,6 +1,9 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/projects";
 export default function Projects() {
+  const { t } = useLocale();
   return (
     <section
       id="projects"
@@ -14,13 +17,13 @@ export default function Projects() {
         eyebrow="05 / Réalisations"
       />
       {projects.length === 0 ? (
-        <p className="empty-state">Mes projets seront ajoutés prochainement.</p>
+        <p className="empty-state">{t("Mes projets seront ajoutés prochainement.")}</p>
       ) : (
         <div className="grid">
           {projects.map((project) => (
             <article className="card" key={project.title}>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
+              <h3>{t(project.title)}</h3>
+              <p>{t(project.description)}</p>
               {project.technologies && (
                 <ul className="badges">
                   {project.technologies.map((tech) => (
@@ -32,12 +35,11 @@ export default function Projects() {
               )}
               <div className="actions">
                 {project.repositoryUrl && (
-                  <a href={project.repositoryUrl}>
-                    Code source de {project.title}
+                  <a href={project.repositoryUrl}>{t("Code source de ")}{t(project.title)}
                   </a>
                 )}
                 {project.demoUrl && (
-                  <a href={project.demoUrl}>Voir {project.title}</a>
+                  <a href={project.demoUrl}>{t("Voir ")}{t(project.title)}</a>
                 )}
               </div>
             </article>

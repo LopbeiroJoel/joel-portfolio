@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import CompanionProps from "@/components/ui/CompanionProps";
 import { createCompanionScenes } from "@/lib/companion-scenes";
 import { createCompanionFall } from "@/lib/companion-fall";
@@ -13,6 +14,7 @@ import {
 type Support = { element: HTMLElement; edge: "top" | "bottom" };
 
 export default function ScrollCompanion() {
+  const { t } = useLocale();
   const companionRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const captionRef = useRef<HTMLSpanElement>(null);
@@ -328,7 +330,7 @@ export default function ScrollCompanion() {
           ref={buttonRef}
           type="button"
           className="companion-hitbox"
-          aria-label="Interagir avec le personnage"
+          aria-label={t("Interagir avec le personnage")}
         >
           <svg
             aria-hidden="true"

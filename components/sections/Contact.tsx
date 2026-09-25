@@ -1,7 +1,10 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ContactForm from "@/components/ui/ContactForm";
 import { profile, socialLinks } from "@/data/profile";
 export default function Contact() {
+  const { t } = useLocale();
   return (
     <section
       id="contact"
@@ -16,13 +19,11 @@ export default function Contact() {
       />
       <div className="contact-grid">
         <div>
-          <p className="contact-intro">
-            Pour échanger sur une alternance en développement informatique.
-          </p>
+          <p className="contact-intro">{t("Pour échanger sur une alternance en développement informatique.")}</p>
           <address>
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
             <a href={profile.phoneHref}>{profile.phone}</a>
-            <span>Saint-Louis, France</span>
+            <span>{t("Saint-Louis, France")}</span>
           </address>
           <ul className="social-links">
             {socialLinks.map((link) => (
@@ -30,7 +31,7 @@ export default function Contact() {
                 {link.url ? (
                   <a href={link.url}>{link.label}</a>
                 ) : (
-                  <span className="muted">[{link.label} à ajouter]</span>
+                  <span className="muted">{t("[")}{link.label}{t("à ajouter]")}</span>
                 )}
               </li>
             ))}

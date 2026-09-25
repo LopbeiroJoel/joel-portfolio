@@ -1,8 +1,11 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SkillGroup from "@/components/ui/SkillGroup";
 import { skillStages } from "@/data/skills";
 
 export default function Skills() {
+  const { t } = useLocale();
   return (
     <section
       id="skills"
@@ -17,23 +20,19 @@ export default function Skills() {
       />
       <ol
         className="skills-progression"
-        aria-label="Progression des compétences"
+        aria-label={t("Progression des compétences")}
       >
         <li>
           <a href="#skills-acquired">
-            <span className="progression-number">01</span> Acquis
-          </a>
+            <span className="progression-number">{t("01")}</span>{t("Acquis")}</a>
         </li>
         <li>
           <a href="#skills-in-progress">
-            <span className="progression-number">02</span> En cours
-          </a>
+            <span className="progression-number">{t("02")}</span>{t("En cours")}</a>
         </li>
         <li>
           <a href="#skills-upcoming">
-            <span className="progression-number">03</span> Future spécialisation
-            Big Data &amp; IA
-          </a>
+            <span className="progression-number">{t("03")}</span>{t("Future spécialisation Big Data & IA")}</a>
         </li>
       </ol>
       <div className="skill-stages">
@@ -45,8 +44,8 @@ export default function Skills() {
             className={`skill-stage skill-stage--${stage.id}`}
           >
             <div className="skill-stage-heading">
-              <h3 id={`skills-${stage.id}-title`}>{stage.title}</h3>
-              <p>{stage.description}</p>
+              <h3 id={`skills-${stage.id}-title`}>{t(stage.title)}</h3>
+              <p>{t(stage.description)}</p>
             </div>
             <div className="skills-cards">
               {stage.categories.map((group) => (

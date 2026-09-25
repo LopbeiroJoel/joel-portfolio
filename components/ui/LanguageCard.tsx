@@ -1,6 +1,9 @@
+"use client";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Language } from "@/types";
 
 export default function LanguageCard({ language }: { language: Language }) {
+  const { t } = useLocale();
   return (
     <article
       className="card language-card"
@@ -19,10 +22,10 @@ export default function LanguageCard({ language }: { language: Language }) {
           <span className="language-code" aria-hidden="true">
             {language.code}
           </span>
-          <span className="language-level">{language.badge}</span>
+          <span className="language-level">{t(language.badge)}</span>
         </div>
-        <h3 id={`language-${language.code}`}>{language.name}</h3>
-        {language.badge === "NATIF" && <p>{language.level}</p>}
+        <h3 id={`language-${language.code}`}>{t(language.name)}</h3>
+        {language.badge === "NATIF" && <p>{t(language.level)}</p>}
         <div
           className={`language-indicator language-indicator--${language.badge === "NATIF" ? "native" : "b2"}`}
           aria-hidden="true"
