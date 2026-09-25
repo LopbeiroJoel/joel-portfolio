@@ -3,6 +3,14 @@ import { education } from "@/data/education";
 export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
+  "Tous les champs sont obligatoires. Votre message sera transmis via Formspree pour me permettre de vous répondre.": ["All fields are required. Your message will be sent via Formspree so I can reply to you.", "Todos os campos são obrigatórios. A sua mensagem será enviada através do Formspree para que eu lhe possa responder."],
+  "Le formulaire n’est pas encore disponible. Pour me joindre, utilisez directement mon adresse email ou mon téléphone.": ["The form is not available yet. Please contact me directly by email or phone.", "O formulário ainda não está disponível. Entre em contacto comigo diretamente por email ou telefone."],
+  "Envoyer le message": ["Send message", "Enviar mensagem"],
+  "Envoi en cours…": ["Sending…", "A enviar…"],
+  "Votre message a bien été envoyé. Merci de m’avoir contacté.": ["Your message has been sent. Thank you for getting in touch.", "A sua mensagem foi enviada. Obrigado pelo contacto."],
+  "Le formulaire est temporairement indisponible. Contactez-moi directement par email.": ["The form is temporarily unavailable. Please contact me directly by email.", "O formulário está temporariamente indisponível. Contacte-me diretamente por email."],
+  "Votre message n’a pas pu être envoyé. Réessayez ou contactez-moi directement par email.": ["Your message could not be sent. Please try again or contact me directly by email.", "Não foi possível enviar a sua mensagem. Tente novamente ou contacte-me diretamente por email."],
+  "L’envoi n’a pas pu être confirmé. Vos informations sont conservées dans le formulaire. Vous pouvez me contacter directement par email.": ["Sending could not be confirmed. Your details remain in the form. You can contact me directly by email.", "Não foi possível confirmar o envio. Os seus dados continuam no formulário. Pode contactar-me diretamente por email."],
   "UNIVERSITÉ": ["UNIVERSITY", "UNIVERSIDADE"],
   "CHEZ VOUS": ["YOUR COMPANY", "NA SUA EMPRESA"],
   "Future alternance": ["Future work-study placement", "Futura formação em alternância"],
