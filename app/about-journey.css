@@ -1,0 +1,61 @@
+.about-journey { display: none; }
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .about-with-journey { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 4rem; align-items: center; }
+  .about-journey { display: block; margin: 0; color: var(--color-primary); }
+  .about-journey svg { display: block; width: 100%; overflow: visible; }
+  .about-journey figcaption { margin-top: 0.75rem; text-align: center; color: var(--color-text-secondary); font-size: 0.8125rem; }
+}
+.journey-paths { stroke: var(--color-primary-light); stroke-width: 1; opacity: 0.5; }
+.journey-connection { stroke-dasharray: 2 5; opacity: 0.4; }
+.journey-label { fill: var(--color-text-secondary); font-size: 10px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px; }
+.journey-wall { fill: var(--color-background); stroke: currentColor; stroke-width: 1; opacity: 0.65; }
+.journey-building--future .journey-wall { stroke-dasharray: 3 3; }
+.journey-detail { fill: currentColor; opacity: 0.4; }
+.journey-door { fill: var(--color-primary-subtle); stroke: var(--color-primary-light); stroke-width: 1; }
+.journey-future { fill: var(--color-primary); font-size: 10px; }
+.journey-actor { animation: journey-route 50s linear infinite; }
+.journey-step-a { animation: journey-step 0.8s steps(1, end) infinite; }
+.journey-step-b { animation: journey-step 0.8s steps(1, end) -0.4s infinite; }
+.journey-arm { transform-origin: 10px 13px; animation: journey-arm 0.8s steps(2, end) infinite alternate; }
+.about-journey:not([data-running="true"]) .journey-actor,
+.about-journey:not([data-running="true"]) .journey-step-a,
+.about-journey:not([data-running="true"]) .journey-step-b,
+.about-journey:not([data-running="true"]) .journey-arm { animation-play-state: paused; }
+@keyframes journey-step { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes journey-arm { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+/* Feet stay on each route. Fades occur only at doors and between complete loops. */
+@keyframes journey-route {
+  0% { transform: translate(12px, 81px); opacity: 0; }
+  1% { transform: translate(12px, 81px); opacity: 0.65; }
+  7%, 8% { transform: translate(90px, 81px); opacity: 0.65; }
+  9%, 11% { transform: translate(90px, 81px); opacity: 0; }
+  12% { transform: translate(90px, 81px); opacity: 0.65; }
+  20% { transform: translate(258px, 81px); opacity: 0.65; }
+  21%, 23% { transform: translate(258px, 81px); opacity: 0; }
+  24% { transform: translate(258px, 81px); opacity: 0.65; }
+  28% { transform: translate(372px, 81px); opacity: 0.65; }
+  29% { transform: translate(372px, 111px); opacity: 0.65; }
+  34% { transform: translate(12px, 111px); opacity: 0.65; }
+  36% { transform: translate(12px, 221px); opacity: 0.65; }
+  41% { transform: translate(90px, 221px); opacity: 0.65; }
+  42%, 44% { transform: translate(90px, 221px); opacity: 0; }
+  45% { transform: translate(90px, 221px); opacity: 0.65; }
+  53% { transform: translate(258px, 221px); opacity: 0.65; }
+  54%, 56% { transform: translate(258px, 221px); opacity: 0; }
+  57% { transform: translate(258px, 221px); opacity: 0.65; }
+  61% { transform: translate(372px, 221px); opacity: 0.65; }
+  62% { transform: translate(372px, 251px); opacity: 0.65; }
+  67% { transform: translate(12px, 251px); opacity: 0.65; }
+  69% { transform: translate(12px, 361px); opacity: 0.65; }
+  74% { transform: translate(90px, 361px); opacity: 0.65; }
+  75%, 77% { transform: translate(90px, 361px); opacity: 0; }
+  78% { transform: translate(90px, 361px); opacity: 0.65; }
+  86% { transform: translate(258px, 361px); opacity: 0.65; }
+  87%, 99% { transform: translate(258px, 361px); opacity: 0; }
+  100% { transform: translate(12px, 81px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-journey .journey-actor { animation: none; transform: translate(12px, 81px); opacity: 0.65; }
+  .about-journey .journey-step-a, .about-journey .journey-step-b, .about-journey .journey-arm { animation: none; }
+  .about-journey .journey-step-b { display: none; }
+}

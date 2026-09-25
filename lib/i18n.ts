@@ -3,6 +3,11 @@ import { education } from "@/data/education";
 export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
+  "UNIVERSITÉ": ["UNIVERSITY", "UNIVERSIDADE"],
+  "CHEZ VOUS": ["YOUR COMPANY", "NA SUA EMPRESA"],
+  "Future alternance": ["Future work-study placement", "Futura formação em alternância"],
+  "La prochaine étape peut être chez vous.": ["The next step could be with you.", "A próxima etapa pode ser na sua empresa."],
+  "Mon parcours : Université, Casino, ESGM, CRIT, EPITECH, puis votre entreprise pour une future alternance.": ["My journey: university, casino, ESGM, CRIT, EPITECH, then your company for a future work-study placement.", "O meu percurso: universidade, casino, ESGM, CRIT, EPITECH e, depois, a sua empresa para uma futura formação em alternância."],
   "Interagir avec le personnage": ["Interact with the character", "Interagir com a personagem"],
   "Aïe": ["Ouch", "Ai"],
   "Arrête, ça fait mal": ["Stop, that hurts", "Para, isso dói"],

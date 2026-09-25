@@ -1,6 +1,7 @@
 import LocaleProvider from "@/components/i18n/LocaleProvider";
 import SkipLink from "@/components/i18n/SkipLink";
 import "./i18n.css";
+import "./about-journey.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Header from "@/components/layout/Header";
