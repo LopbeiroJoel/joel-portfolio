@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import CompanionProps from "@/components/ui/CompanionProps";
+import { createCompanionScenes } from "@/lib/companion-scenes";
 import { createCompanionFall } from "@/lib/companion-fall";
 import { createCompanionJump } from "@/lib/companion-jump";
 import {
@@ -30,7 +32,7 @@ export default function ScrollCompanion() {
       sprite.style.removeProperty("opacity");
       if (motion.matches || clickState.current.departed) return;
       const elements = Array.from(
-        document.querySelectorAll<HTMLElement>("main .section, main .card"),
+        document.querySelectorAll<HTMLElement>("main .section, main .card, #home .profile-panel"),
       );
       const supports: Support[] = elements.flatMap((element) => {
         const style = getComputedStyle(element);
@@ -76,6 +78,7 @@ export default function ScrollCompanion() {
           frame = 0;
         },
       });
+      const disposeScenes = createCompanionScenes(sprite, caption);
 
       function surface(item: Support) {
         const rect = item.element.getBoundingClientRect();
@@ -94,6 +97,8 @@ export default function ScrollCompanion() {
         };
       }
       function labelSupport(item: Support) {
+        const section = item.element.closest('main > section');
+        sprite.dataset.section = section?.id || section?.getAttribute('aria-labelledby')?.replace('-title', '') || '';
         sprite.dataset.supportIndex = String(elements.indexOf(item.element));
         sprite.dataset.supportEdge = item.edge;
       }
@@ -181,6 +186,14 @@ export default function ScrollCompanion() {
         };
         const candidates = supports.filter(visible);
         if (window.scrollY < 40) {
+          // L'accueil ajoute uniquement une pose calme, posée sur le cadre existant.
+          const home = candidates.find((item) => item.element.matches('#home .profile-panel'));
+          if (home) {
+            support = home;
+            sprite.hidden = false;
+            paint(now);
+            return;
+          }
           sprite.hidden = true;
           support = undefined;
           return;
@@ -281,6 +294,7 @@ export default function ScrollCompanion() {
       window.addEventListener("resize", onResize);
       measure(false);
       dispose = () => {
+        disposeScenes();
         clicks.dispose();
         jump.cancel();
         fall.dispose();
@@ -344,6 +358,7 @@ export default function ScrollCompanion() {
             <g className="pixel-seated">
               <path d="M7 9h6v2h2v6h-2v2H7v-2H5v-6h2zM9 20h3v7h4v2H8v-2H7v-6h2zM5 21h2v8H4v-2h1zM14 29h3v5h3v2h-6z" />
             </g>
+            <CompanionProps />
           </svg>
         </button>
       </div>

@@ -1,0 +1,144 @@
+/* Decorative resting scenes. Existing locomotion and click animations win. */
+.companion-props { pointer-events: none; }
+.scene-prop { display: none; }
+.scene-paper { fill: var(--color-background); }
+.scroll-companion[data-scene] .pixel-seated { display: none; }
+.scroll-companion[data-scene] .pixel-standing { display: block; }
+.scroll-companion[data-scene="home"] .pixel-standing {
+  transform-origin: 10px 29px;
+  animation: scene-breathe 7s ease-in-out infinite;
+}
+@keyframes scene-breathe {
+  0%, 35%, 75%, 100% { transform: scaleY(1); }
+  55% { transform: scaleY(0.98); }
+}
+[data-scene="experience"] .scene-shovel,
+[data-scene="education"] .scene-book,
+[data-scene="skills"] .scene-dumbbell,
+[data-scene="projects"] .scene-computer,
+[data-scene="languages"] .scene-conversation,
+[data-scene="certifications"] .scene-certificate,
+[data-scene="interests"] .scene-poker,
+[data-scene="contact"] .scene-envelope { display: block; }
+[data-scene="experience"] .scene-shovel-tool {
+  transform-origin: 21px 17px;
+  animation: scene-dig 6s ease-in-out infinite;
+}
+[data-scene="experience"] .pixel-arm-right {
+  animation: scene-work-arm 6s ease-in-out infinite;
+}
+.scene-soil { animation: scene-soil 6s steps(2, end) infinite; }
+@keyframes scene-dig {
+  0%, 12%, 45%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-28deg) translateY(-2px); }
+  32% { transform: rotate(12deg) translateY(1px); }
+}
+@keyframes scene-work-arm {
+  0%, 12%, 45%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-35deg); }
+  32% { transform: rotate(12deg); }
+}
+@keyframes scene-soil {
+  0%, 30%, 48%, 100% { opacity: 0; transform: translateY(0); }
+  33% { opacity: 0.65; transform: translateY(-3px); }
+  42% { opacity: 0; transform: translateY(0); }
+}
+[data-scene="education"] .pixel-arm-left { transform: rotate(-25deg); }
+[data-scene="education"] .pixel-arm-right { transform: rotate(25deg); }
+.scene-page {
+  transform-origin: 11px 20px;
+  animation: scene-turn-page 9s ease-in-out infinite;
+}
+@keyframes scene-turn-page {
+  0%, 55%, 70%, 100% { transform: translateX(0) scaleX(1); }
+  61% { transform: translateX(-4px) scaleX(0.5); }
+  65% { transform: translateX(-6px) scaleX(1); }
+}
+[data-scene="skills"] .scene-dumbbell {
+  animation: scene-lift 8s ease-in-out infinite;
+}
+[data-scene="skills"] .pixel-arm-right {
+  animation: scene-curl 8s ease-in-out infinite;
+}
+@keyframes scene-lift {
+  0%, 10%, 30%, 50%, 100% { transform: translateY(0); }
+  20%, 40% { transform: translateY(-6px); }
+}
+@keyframes scene-curl {
+  0%, 10%, 30%, 50%, 100% { transform: rotate(0); }
+  20%, 40% { transform: rotate(-65deg); }
+}
+[data-scene="projects"] .pixel-arm-right {
+  animation: scene-type 7s steps(2, end) infinite;
+}
+.scene-check { animation: scene-validated 14s ease-in-out infinite; }
+@keyframes scene-type {
+  0%, 12%, 24%, 36%, 48%, 60%, 100% { transform: rotate(0); }
+  18%, 30%, 42%, 54% { transform: rotate(-15deg); }
+}
+@keyframes scene-validated {
+  0%, 72%, 88%, 100% { opacity: 0; }
+  76%, 84% { opacity: 0.8; }
+}
+.scene-bubble { opacity: 0; animation: scene-greeting 20s linear infinite; }
+.scene-bubble-1 { animation-delay: 4s; }
+.scene-bubble-2 { animation-delay: 8s; }
+.scene-bubble-3 { animation-delay: 12s; }
+.scene-bubble-background {
+  fill: var(--color-background);
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.scene-bubble text { font-family: "Tiny5", monospace; font-size: 13px; }
+[data-scene-side="right"] .scene-friend { transform: translateX(29px); }
+[data-scene-side="right"] .scene-bubble { translate: 18px 0; }
+@keyframes scene-greeting {
+  0%, 2%, 19%, 100% { opacity: 0; }
+  4%, 16% { opacity: 1; }
+}
+[data-scene="certifications"] .scene-certificate {
+  animation: scene-read-document 9s ease-in-out infinite;
+}
+@keyframes scene-read-document {
+  0%, 35%, 75%, 100% { transform: translateY(0); }
+  45%, 65% { transform: translateY(4px); }
+}
+.scene-poker { animation: scene-show-card 12s linear infinite; }
+[data-scene="interests"] .pixel-arm-left {
+  animation: scene-guard-left 12s ease-in-out infinite;
+}
+[data-scene="interests"] .pixel-arm-right {
+  animation: scene-guard-right 12s ease-in-out infinite;
+}
+@keyframes scene-show-card {
+  0%, 3%, 32%, 100% { opacity: 0; }
+  7%, 27% { opacity: 1; }
+}
+@keyframes scene-guard-left {
+  0%, 48%, 78%, 100% { transform: rotate(0); }
+  55%, 70% { transform: rotate(65deg); }
+}
+@keyframes scene-guard-right {
+  0%, 48%, 78%, 100% { transform: rotate(0); }
+  55%, 70% { transform: rotate(-55deg); }
+}
+.scene-envelope { animation: scene-letter 12s ease-in-out infinite; }
+[data-scene="contact"] .pixel-arm-right {
+  animation: scene-goodbye 12s ease-in-out infinite;
+}
+@keyframes scene-letter {
+  0%, 5%, 47%, 100% { opacity: 0; transform: translateY(3px); }
+  10%, 30% { opacity: 1; transform: translateY(0); }
+  40% { opacity: 0; transform: translateY(5px); }
+}
+@keyframes scene-goodbye {
+  0%, 48%, 74%, 100% { transform: rotate(0); }
+  54%, 64% { transform: rotate(-120deg); }
+  59%, 69% { transform: rotate(-95deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .companion-props { display: none; }
+  .scroll-companion[data-scene] .pixel-standing,
+  .scroll-companion[data-scene] .pixel-arm-left,
+  .scroll-companion[data-scene] .pixel-arm-right { animation: none; }
+}
