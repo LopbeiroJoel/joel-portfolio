@@ -173,6 +173,7 @@
 /* Portrait fourni : cadrage original, verre léger limité au cadre. */
 .hero .profile-panel {
   width: 196px;
+  justify-self: center;
   max-width: 100%;
   padding: 8px;
   border: 1px solid rgba(255, 255, 255, 0.85);
