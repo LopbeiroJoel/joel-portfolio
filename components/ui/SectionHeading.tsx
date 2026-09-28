@@ -6,7 +6,7 @@ export default function SectionHeading({ id, title, eyebrow }: Props) {
   return (
     <div className="section-heading">
       {eyebrow && <p className="eyebrow">{t(eyebrow)}</p>}
-      <h2 id={id}>{t(title)}</h2>
+      <h2 id={id}>{t(title)}<span className="accent">.</span></h2>
     </div>
   );
 }

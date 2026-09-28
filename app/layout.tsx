@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import "./animations.css";
 import "./skills.css";
+import "./skills-journey.css";
 import "./languages.css";
 import "./refinements.css";
 import "./companion-scenes.css";
