@@ -14,7 +14,6 @@ export default function Projects() {
       <SectionHeading
         id="projects-title"
         title="Projets"
-        eyebrow="05 / Réalisations"
       />
       {projects.length === 0 ? (
         <p className="empty-state">{t("Mes projets seront ajoutés prochainement.")}</p>

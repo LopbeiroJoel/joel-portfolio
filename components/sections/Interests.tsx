@@ -9,7 +9,6 @@ export default function Interests() {
       <SectionHeading
         id="interests-title"
         title="Centres d’intérêt"
-        eyebrow="08 / En dehors des études"
       />
       <div className="grid">
         {interests.map((interest) => (

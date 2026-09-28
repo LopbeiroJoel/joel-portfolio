@@ -12,7 +12,6 @@ export default function Experience() {
       <SectionHeading
         id="experiences-title"
         title="Expériences professionnelles"
-        eyebrow="02 / Parcours"
       />
       <div className="stack">
         {experiences.map((item) => (

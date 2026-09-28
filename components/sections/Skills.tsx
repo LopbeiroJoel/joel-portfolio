@@ -16,7 +16,6 @@ export default function Skills() {
       <SectionHeading
         id="skills-title"
         title="Compétences"
-        eyebrow="04 / Progression"
       />
       <ol
         className="skills-progression"

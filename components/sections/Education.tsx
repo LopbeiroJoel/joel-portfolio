@@ -12,7 +12,6 @@ export default function Education() {
       <SectionHeading
         id="education-title"
         title="Formation"
-        eyebrow="03 / Études"
       />
       <div className="stack">
         {education.map((item) => (

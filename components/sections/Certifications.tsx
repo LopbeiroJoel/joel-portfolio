@@ -12,7 +12,6 @@ export default function Certifications() {
       <SectionHeading
         id="certifications-title"
         title="Certifications"
-        eyebrow="07 / Apprentissage"
       />
       <ul className="certification-list">
         {certifications.map((certification) => (

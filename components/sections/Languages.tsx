@@ -12,7 +12,6 @@ export default function Languages() {
       <SectionHeading
         id="languages-title"
         title="Langues"
-        eyebrow="06 / Communication"
       />
       <div className="languages-cards">
         {languages.map((language) => (

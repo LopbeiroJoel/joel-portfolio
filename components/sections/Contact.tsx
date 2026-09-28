@@ -15,7 +15,6 @@ export default function Contact() {
       <SectionHeading
         id="contact-title"
         title="Contact"
-        eyebrow="09 / Échangeons"
       />
       <div className="contact-grid">
         <div>
