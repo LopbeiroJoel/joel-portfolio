@@ -15,8 +15,24 @@ export type Education = {
 };
 export type SkillCategory = { category: string; skills: string[] };
 export type Project = {
+  id: string;
   title: string;
-  description: string;
+  image: {
+    src: string;
+    alt: Record<"fr" | "en" | "pt", string>;
+    width: number;
+    height: number;
+  };
+  accentColor: string;
+  content: Record<
+    "fr" | "en" | "pt",
+    {
+      summary: string[];
+      intro: string;
+      sections: { title: string; paragraphs: string[] }[];
+      conclusion: string;
+    }
+  >;
   technologies?: string[];
   repositoryUrl?: string;
   demoUrl?: string;

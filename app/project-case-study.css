@@ -1,0 +1,81 @@
+.project-case-list { display: grid; gap: 2rem; }
+.project-case {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-background-alt);
+}
+.project-case-media { position: sticky; top: 7rem; min-width: 0; }
+.project-case-frame {
+  padding: 8px;
+  border: 1px solid var(--project-accent);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--color-white);
+  transition: transform 360ms ease, border-color 360ms ease;
+}
+.project-case-image { display: block; width: 100%; height: auto; border-radius: 0.35rem; }
+.project-case[data-expanded="true"] .project-case-frame { transform: scale(1.025); }
+.project-case-content { min-width: 0; }
+.project-case-title { font-size: clamp(1.75rem, 3vw, 2.25rem); letter-spacing: -0.045em; margin-bottom: 1.5rem; }
+.project-case-content p { color: var(--color-text-secondary); font-size: 0.9375rem; line-height: 1.8; }
+.project-case-summary p:first-child, .project-case-content .project-case-intro { color: var(--color-text); }
+.project-case-summary p + p { margin-top: 1rem; }
+.project-case-fold { display: grid; transition: grid-template-rows 360ms ease, opacity 250ms ease, transform 360ms ease; }
+.project-case-fold > div { min-height: 0; overflow: hidden; }
+.project-case-summary { grid-template-rows: 1fr; opacity: 1; }
+.project-case-details { grid-template-rows: 0fr; opacity: 0; transform: translateY(4px); }
+.project-case[data-expanded="true"] .project-case-summary { grid-template-rows: 0fr; opacity: 0; }
+.project-case[data-expanded="true"] .project-case-details { grid-template-rows: 1fr; opacity: 1; transform: translateY(0); }
+.project-case-toggle, .project-case-close {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  padding: 0.65rem 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: left;
+}
+.project-case-toggle { width: 100%; margin-top: 1rem; }
+.project-case-toggle > span:last-child, .project-case-close > span { font-size: 1.1rem; color: var(--project-accent); }
+.project-case[data-expanded="true"] .project-case-toggle { margin-top: 0; margin-bottom: 1rem; color: var(--color-primary); }
+.project-case-close { margin-top: 1.5rem; color: var(--color-primary); gap: 1.5rem; }
+.project-case-topic { margin-top: 1.75rem; }
+.project-case-topic h4 { font-size: 0.9375rem; letter-spacing: -0.015em; margin: 0 0 0.55rem; color: var(--color-text); }
+.project-case-content .project-case-conclusion { margin-top: 1.75rem; padding-left: 1rem; border-left: 1px solid var(--project-accent); color: var(--color-text); }
+.project-case-technologies { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin-top: 1rem; }
+.project-case-technologies li { border: 1px solid var(--color-border); padding: 0.15rem 0.5rem; border-radius: 0.3rem; font-size: 0.75rem; color: var(--color-text-secondary); }
+.project-case-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.5rem; font-size: 0.8125rem; }
+.project-case-links a { display: inline-flex; gap: 0.5rem; }
+.project-help-hover, .project-help-phone { display: none; }
+/* Projects stay focused on the case study; the companion is unchanged elsewhere. */
+.scroll-companion[data-section="projects"] { visibility: hidden; }
+@media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
+  .project-help-hover { display: inline; }
+  .project-help-tap { display: none; }
+}
+@media (max-width: 1099px) {
+  .project-case { grid-template-columns: minmax(0, 1fr); }
+  .project-case-media { position: static; width: min(100%, 560px); margin-inline: auto; }
+}
+@media (max-width: 599px) {
+  .project-case { padding: 1.25rem; gap: 2rem; }
+  .project-case-frame { padding: 5px; }
+  .project-help-tap { display: none; }
+  .project-help-phone { display: inline; }
+  .project-case-title { margin-bottom: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-case-frame, .project-case-fold { transition: none; }
+  .project-case[data-expanded="true"] .project-case-frame, .project-case-details { transform: none; }
+}
