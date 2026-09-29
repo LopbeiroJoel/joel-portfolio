@@ -9,6 +9,7 @@ export default function LanguageCard({ language }: { language: Language }) {
       className="card language-card"
       tabIndex={0}
       aria-labelledby={`language-${language.code}`}
+      onClick={(event) => event.currentTarget.focus({ preventScroll: true })}
     >
       <span
         className="language-greeting"

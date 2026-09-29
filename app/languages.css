@@ -131,9 +131,9 @@
     transform: scaleX(1.06);
   }
 }
-/* Sur écran tactile, les salutations restent visibles sans survol. */
+/* Sur écran tactile, une pression révèle la salutation de la carte. */
 @media (hover: none), (pointer: coarse), (max-width: 649px) {
-  .language-card .language-greeting {
+  .language-card:focus .language-greeting {
     opacity: 0.12;
     transform: translateY(0);
   }
