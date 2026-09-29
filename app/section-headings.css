@@ -1,0 +1,21 @@
+.section-heading > .section-title-pill {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.3em 0.65em;
+  border: 1.5px solid var(--color-primary);
+  border-radius: 999px;
+  color: var(--color-graphite);
+  background: transparent;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.about-prose .bio-accent {
+  color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+  .section-heading > .section-title-pill {
+    padding-inline: 0.6em;
+  }
+}

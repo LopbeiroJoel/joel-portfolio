@@ -1,0 +1,40 @@
+/* Limited to the illustrated experience and education groups. */
+.grouped-timeline-card > .competency-groups { grid-column: 1 / -1; }
+.competency-groups { border-top: 1px solid var(--color-border); padding-top: 1.4rem; }
+.competency-groups-intro { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin-bottom: 1rem; }
+.competency-groups-intro > p { margin: 0; }
+.competency-groups-label { color: var(--color-text-secondary); font-size: .8125rem; font-weight: 500; }
+.competency-groups-hint { color: var(--color-text-secondary); font-size: .75rem; line-height: 1.6; }
+.competency-hint-hover { display: none; }
+.competency-groups-grid { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 1rem; }
+.competency-group { min-width: 0; overflow: hidden; border: 1px solid rgba(54, 92, 73, .12); border-radius: 1rem; background: rgba(255, 255, 255, .65); transition: border-color .22s ease, background-color .22s ease; }
+.competency-group[data-expanded="true"] { border-color: rgba(54, 92, 73, .35); background-color: var(--color-white); }
+.competency-group-heading { margin: 0; font-size: inherit; }
+.competency-group-trigger { position: relative; display: flex; flex-direction: column; align-items: center; gap: .85rem; width: 100%; min-width: 0; padding: 1.1rem 1.25rem 1.35rem; border: 0; border-radius: 1rem; background: transparent; color: var(--color-primary); font: inherit; text-align: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.competency-group-trigger:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -4px; }
+.competency-visual { display: block; flex: none; width: 66px; height: 53px; max-width: 100%; transition: transform .25s ease; }
+.competency-group-title { display: block; max-width: 31ch; font-size: .925rem; font-weight: 550; line-height: 1.5; letter-spacing: -.015em; text-wrap: balance; }
+.competency-group-toggle { position: absolute; right: .85rem; top: .7rem; color: var(--color-primary-light); font-size: 1.05rem; font-weight: 400; line-height: 1; }
+.competency-group-detail { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows .26s ease, opacity .22s ease, visibility .26s; }
+.competency-group[data-expanded="true"] .competency-group-detail { grid-template-rows: 1fr; opacity: 1; visibility: visible; }
+.competency-group-clip { min-height: 0; overflow: hidden; }
+.competency-group-list { margin: 0 1.25rem; padding: 1rem 0 1.2rem 1rem; border-top: 1px solid var(--color-border); color: var(--color-text-secondary); font-size: .8125rem; line-height: 1.7; }
+.competency-group-list li + li { margin-top: .45rem; }
+.competency-group-list li::marker { color: var(--color-primary-light); font-size: .8em; }
+@media (min-width: 650px) {
+  .grouped-timeline-card { grid-template-columns: 170px minmax(0, 1fr); gap: 1.5rem 2rem; }
+  .competency-groups-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .competency-group-title { min-height: 3em; }
+}
+@media (min-width: 1000px) {
+  .competency-groups-grid[data-columns="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
+  .competency-hint-hover { display: inline; }
+  .competency-hint-tap { display: none; }
+  .competency-group-trigger:hover .competency-visual { transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .competency-group, .competency-group-detail, .competency-visual { transition: none; }
+  .competency-group-trigger:hover .competency-visual { transform: none; }
+}

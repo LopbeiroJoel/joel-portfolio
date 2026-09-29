@@ -1,10 +1,11 @@
 "use client";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Education } from "@/types";
+import CompetencyGroups from "@/components/ui/CompetencyGroups";
 export default function EducationCard({ education }: { education: Education }) {
   const { t } = useLocale();
   return (
-    <article className="card timeline-card">
+    <article className={`card timeline-card${education.groups?.length ? " grouped-timeline-card" : ""}`}>
       <p className="period">{t(education.period)}</p>
       <div>
         {education.status && <p className="badge status">{t(education.status)}</p>}
@@ -15,7 +16,7 @@ export default function EducationCard({ education }: { education: Education }) {
             <p key={paragraph}>{t(paragraph)}</p>
           ))}
         </div>
-        {education.details.length > 0 && (
+        {!education.groups?.length && education.details.length > 0 && (
           <>
             <h4 className="list-heading">
               {t(education.status
@@ -30,6 +31,8 @@ export default function EducationCard({ education }: { education: Education }) {
           </>
         )}
       </div>
+      {!!education.groups?.length && <CompetencyGroups groups={education.groups}
+        label={education.status ? "Compétences et technologies qui seront abordées" : "Compétences"} />}
     </article>
   );
 }

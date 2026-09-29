@@ -22,6 +22,42 @@ export const experiences: Experience[] = [
       "Fiabilisation des informations financières",
       "Respect des procédures et des délais",
     ],
+    groups: [
+      {
+        id: "crit-finance",
+        title: "Gestion Comptable et Financière",
+        visual: "safe",
+        skills: [
+          "Comptabilité clients",
+          "Saisie et intégration comptable",
+          "Rapprochements bancaires",
+          "Suivi et contrôle des flux financiers",
+        ],
+      },
+      {
+        id: "crit-data",
+        title: "Analyse et Fiabilisation des Données",
+        visual: "microscope",
+        skills: [
+          "Analyse de données financières",
+          "Organisation et structuration des données",
+          "Contrôle de cohérence des données",
+          "Fiabilisation des informations financières",
+        ],
+      },
+      {
+        id: "crit-tools",
+        title: "Optimisation des Processus et Outils de Gestion",
+        visual: "toolbox",
+        skills: [
+          "Excel avancé",
+          "Tableaux de suivi et reporting",
+          "Automatisation de traitements",
+          "Paramétrage et amélioration d’un PGI",
+          "Respect des procédures et des délais",
+        ],
+      },
+    ],
   },
   {
     role: "Croupier — Job étudiant",
@@ -42,6 +78,34 @@ export const experiences: Experience[] = [
       "Confidentialité",
       "Responsabilité financière",
       "Réactivité opérationnelle",
+    ],
+    groups: [
+      {
+        id: "casino-operations",
+        title: "Pilotage Opérationnel et Relation Client",
+        visual: "cards",
+        skills: [
+          "Gestion des opérations de jeu",
+          "Réactivité opérationnelle",
+          "Analyse rapide",
+          "Prise de décision",
+          "Relation client",
+          "Communication",
+          "Adaptabilité",
+        ],
+      },
+      {
+        id: "casino-risk",
+        title: "Gestion des Risques et Conformité",
+        visual: "shield",
+        skills: [
+          "Gestion des flux financiers",
+          "Gestion du risque",
+          "Respect des procédures réglementaires",
+          "Responsabilité financière",
+          "Confidentialité",
+        ],
+      },
     ],
   },
 ];

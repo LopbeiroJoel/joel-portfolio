@@ -22,6 +22,32 @@ export const education: Education[] = [
       "Analyse et interprétation de données complexes",
       "Intelligence artificielle",
     ],
+    groups: [
+      {
+        id: "msc-architecture",
+        title: "Architecture et Traitement Big Data",
+        visual: "factory",
+        skills: [
+          "Big Data",
+          "Data streaming",
+          "Hadoop",
+          "Apache Spark",
+          "Infrastructures cloud",
+          "Traitement de grandes quantités de données",
+        ],
+      },
+      {
+        id: "msc-governance",
+        title: "Gouvernance et Valorisation des Données",
+        visual: "control",
+        skills: [
+          "Sécurisation des données",
+          "Visualisation de données",
+          "Analyse et interprétation de données complexes",
+          "Intelligence artificielle",
+        ],
+      },
+    ],
   },
   {
     degree: "Pré-MSc — Parcours Master of Science",
@@ -44,6 +70,41 @@ export const education: Education[] = [
       "Algorithmique",
       "Méthodes Agile",
     ],
+    groups: [
+      {
+        id: "pre-msc-software",
+        title: "Développement Logiciel et Programmation",
+        visual: "blocks",
+        skills: [
+          "Python",
+          "JavaScript / TypeScript",
+          "Programmation orientée objet",
+        ],
+      },
+      {
+        id: "pre-msc-architecture",
+        title: "Architecture Réseau, API et Stockage de Données",
+        visual: "servers",
+        skills: [
+          "Développement web",
+          "APIs REST",
+          "SQL & bases de données",
+        ],
+      },
+      {
+        id: "pre-msc-devops",
+        title: "Ingénierie DevOps et Outils de Développement",
+        visual: "drafting",
+        skills: [
+          "Git & GitHub",
+          "Linux / Bash",
+          "CI/CD",
+          "Architecture applicative",
+          "Algorithmique",
+          "Méthodes Agile",
+        ],
+      },
+    ],
   },
   {
     degree: "DCG / BTS Comptabilité et Gestion",
@@ -63,6 +124,31 @@ export const education: Education[] = [
       "Structuration de données",
       "Optimisation de processus",
     ],
+    groups: [
+      {
+        id: "accounting-finance",
+        title: "Gestion Comptable et Financière",
+        visual: "finance",
+        skills: [
+          "Comptabilité générale",
+          "Comptabilité analytique",
+          "Gestion financière",
+          "Fiscalité",
+        ],
+      },
+      {
+        id: "accounting-data-tools",
+        title: "Analyse de Données et Optimisation des Outils",
+        visual: "toolbox",
+        skills: [
+          "Excel avancé",
+          "PGI",
+          "Analyse de données",
+          "Structuration de données",
+          "Optimisation de processus",
+        ],
+      },
+    ],
   },
   {
     degree: "Licence Administration Économique et Sociale",
@@ -80,6 +166,27 @@ export const education: Education[] = [
       "Relations internationales",
       "Méthodes quantitatives",
       "Analyse économique",
+    ],
+    groups: [
+      {
+        id: "aes-finance",
+        title: "Gestion Financière et Analyse Économique",
+        visual: "finance",
+        skills: [
+          "Gestion",
+          "Comptabilité d’entreprise",
+          "Économie & macroéconomie",
+          "Analyse économique",
+          "Relations internationales",
+          "Méthodes quantitatives",
+        ],
+      },
+      {
+        id: "aes-law",
+        title: "Affaires Juridiques et Conformité Réglementaire",
+        visual: "law",
+        skills: ["Droit privé", "Droit public"],
+      },
     ],
   },
   {

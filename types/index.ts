@@ -1,9 +1,31 @@
+export type GroupVisual =
+  | "safe"
+  | "microscope"
+  | "toolbox"
+  | "cards"
+  | "shield"
+  | "factory"
+  | "control"
+  | "blocks"
+  | "servers"
+  | "drafting"
+  | "finance"
+  | "law";
+
+export type CompetencyGroup = {
+  id: string;
+  title: string;
+  visual: GroupVisual;
+  skills: string[];
+};
+
 export type Experience = {
   role: string;
   company: string;
   period: string;
   summary: string;
   skills: string[];
+  groups?: CompetencyGroup[];
 };
 export type Education = {
   degree: string;
@@ -12,6 +34,7 @@ export type Education = {
   description: string[];
   details: string[];
   status?: string;
+  groups?: CompetencyGroup[];
 };
 export type SkillCategory = { category: string; skills: string[] };
 export type Project = {
