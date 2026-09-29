@@ -131,6 +131,13 @@
     transform: scaleX(1.06);
   }
 }
+/* Sur écran tactile, les salutations restent visibles sans survol. */
+@media (hover: none), (pointer: coarse), (max-width: 649px) {
+  .language-card .language-greeting {
+    opacity: 0.12;
+    transform: translateY(0);
+  }
+}
 @media (min-width: 650px) {
   .languages-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));

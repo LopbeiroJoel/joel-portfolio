@@ -50,6 +50,18 @@ export const projects: Project[] = [
             ],
           },
           {
+            title: "Calendriers & sondages",
+            paragraphs: [
+              "L’application permet de créer des calendriers de matchs et d’entraînements, ainsi que des sondages pour faciliter l’organisation de l’équipe.",
+            ],
+          },
+          {
+            title: "Préparation & suivi des matchs",
+            paragraphs: [
+              "Les entraîneurs peuvent préparer des fiches de match, ajouter des notes sur les joueurs pour chaque rencontre et créer des compositions d’équipe avec les photos des joueurs.",
+            ],
+          },
+          {
             title: "Data & statistiques",
             paragraphs: [
               "Enfin, MercaSport intègre une dimension data et statistiques. Les clubs comme les joueurs peuvent disposer de données plus ou moins avancées sur leurs performances et leur activité. Plusieurs formules d’abonnement permettent d’accéder à différents niveaux d’analyse, avec la possibilité pour MercaSport de produire directement certaines statistiques et données avancées.",
@@ -57,7 +69,7 @@ export const projects: Project[] = [
           },
         ],
         conclusion:
-          "L’ambition de MercaSport est ainsi de centraliser recrutement, mise en relation, communication et analyse de données au sein d’un même outil dédié au football amateur.",
+          "Toutes ces fonctionnalités sont réunies dans une interface simple, claire et facile à prendre en main, pensée pour les entraîneurs et les joueurs de tous âges.",
       },
       en: {
         summary: [
@@ -93,6 +105,18 @@ export const projects: Project[] = [
             ],
           },
           {
+            title: "Calendars & polls",
+            paragraphs: [
+              "The application lets teams create match and training calendars, as well as polls to make team organisation easier.",
+            ],
+          },
+          {
+            title: "Match preparation & player notes",
+            paragraphs: [
+              "Coaches can prepare match sheets, add notes on players for each match and create team lineups featuring player photos.",
+            ],
+          },
+          {
             title: "Data & statistics",
             paragraphs: [
               "MercaSport also includes a data and statistics dimension. Both clubs and players can access varying levels of data on their performance and activity. Several subscription plans provide access to different levels of analysis, with MercaSport also able to produce certain statistics and advanced data directly.",
@@ -100,7 +124,7 @@ export const projects: Project[] = [
           },
         ],
         conclusion:
-          "MercaSport’s ambition is to bring recruitment, connections, communication and data analysis together in a single tool dedicated to amateur football.",
+          "All these features come together in a simple, clear and easy-to-use interface, designed for coaches and players of all ages.",
       },
       pt: {
         summary: [
@@ -136,6 +160,18 @@ export const projects: Project[] = [
             ],
           },
           {
+            title: "Calendários e sondagens",
+            paragraphs: [
+              "A aplicação permite criar calendários de jogos e treinos, bem como sondagens para facilitar a organização da equipa.",
+            ],
+          },
+          {
+            title: "Preparação e acompanhamento dos jogos",
+            paragraphs: [
+              "Os treinadores podem preparar fichas de jogo, acrescentar notas sobre os jogadores em cada partida e criar formações da equipa com as fotografias dos jogadores.",
+            ],
+          },
+          {
             title: "Dados e estatísticas",
             paragraphs: [
               "Por fim, a MercaSport integra uma dimensão de dados e estatísticas. Tanto os clubes como os jogadores podem dispor de dados mais ou menos avançados sobre o seu desempenho e a sua atividade. Vários planos de subscrição dão acesso a diferentes níveis de análise, com a possibilidade de a MercaSport produzir diretamente determinadas estatísticas e dados avançados.",
@@ -143,7 +179,7 @@ export const projects: Project[] = [
           },
         ],
         conclusion:
-          "A ambição da MercaSport é, assim, centralizar o recrutamento, a ligação entre pessoas e clubes, a comunicação e a análise de dados numa única ferramenta dedicada ao futebol amador.",
+          "Todas estas funcionalidades estão reunidas numa interface simples, clara e fácil de utilizar, pensada para treinadores e jogadores de todas as idades.",
       },
     },
   },
