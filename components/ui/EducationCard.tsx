@@ -2,6 +2,12 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Education } from "@/types";
 import CompetencyGroups from "@/components/ui/CompetencyGroups";
+const accentedInstitutions = new Set([
+  "EPITECH Strasbourg",
+  "ESGM Pro Format / Pigier Mulhouse",
+  "Université de Strasbourg",
+]);
+
 export default function EducationCard({ education }: { education: Education }) {
   const { t } = useLocale();
   return (
@@ -10,7 +16,7 @@ export default function EducationCard({ education }: { education: Education }) {
       <div>
         {education.status && <p className="badge status">{t(education.status)}</p>}
         <h3>{t(education.degree)}</h3>
-        <p className="institution">{education.institution}</p>
+        <p className={`institution${accentedInstitutions.has(education.institution) ? " institution--accent" : ""}`}>{education.institution}</p>
         <div className="entry-summary">
           {education.description.map((paragraph) => (
             <p key={paragraph}>{t(paragraph)}</p>

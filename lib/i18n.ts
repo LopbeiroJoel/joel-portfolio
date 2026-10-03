@@ -3,6 +3,8 @@ import { education } from "@/data/education";
 export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
+  "* Survolez une fenêtre pour explorer les compétences associées.": ["* Hover over a window to explore the related skills.", "* Passe o cursor sobre uma janela para explorar as competências associadas."],
+  "* Appuyez sur une fenêtre pour explorer les compétences associées.": ["* Tap a window to explore the related skills.", "* Toque numa janela para explorar as competências associadas."],
   "Tous les champs sont obligatoires. Votre message sera transmis via Formspree pour me permettre de vous répondre.": ["All fields are required. Your message will be sent via Formspree so I can reply to you.", "Todos os campos são obrigatórios. A sua mensagem será enviada através do Formspree para que eu lhe possa responder."],
   "Le formulaire n’est pas encore disponible. Pour me joindre, utilisez directement mon adresse email ou mon téléphone.": ["The form is not available yet. Please contact me directly by email or phone.", "O formulário ainda não está disponível. Entre em contacto comigo diretamente por email ou telefone."],
   "Envoyer le message": ["Send message", "Enviar mensagem"],

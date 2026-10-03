@@ -1,0 +1,20 @@
+.window-controls { display: flex; align-items: center; flex: none; gap: 0; }
+.window-control { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 8px; background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.window-control-dot { display: grid; place-items: center; width: 12px; height: 12px; border: 1px solid rgba(0, 0, 0, .09); border-radius: 50%; transition: filter .18s ease, transform .18s ease; }
+.window-control--close .window-control-dot { background: #e7a29a; color: #733e39; }
+.window-control--minimize .window-control-dot { background: #e5ca8c; color: #746039; }
+.window-control--expand .window-control-dot { background: #8fb69e; color: var(--color-primary); }
+.window-control-dot svg { width: 10px; height: 10px; opacity: 0; transition: opacity .18s ease; }
+.window-controls:hover .window-control-dot svg, .window-controls:focus-within .window-control-dot svg { opacity: 1; }
+.window-control:hover .window-control-dot { filter: saturate(1.2); }
+.window-control:active .window-control-dot { transform: scale(.88); }
+.window-control:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 0; }
+@media (hover: none), (pointer: coarse), (max-width: 1099px) {
+  .window-control { width: 44px; height: 44px; }
+  .window-control-dot { width: 13px; height: 13px; }
+  .window-control-dot svg { opacity: .85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .window-control-dot, .window-control-dot svg { transition: none; }
+  .window-control:active .window-control-dot { transform: none; }
+}

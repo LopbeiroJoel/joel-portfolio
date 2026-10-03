@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import WindowControls from "@/components/ui/WindowControls";
 import type { Project } from "@/types";
 
 const hoverQuery = "(min-width: 1100px) and (hover: hover) and (pointer: fine)";
@@ -43,17 +44,22 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
   const [pinned, setPinned] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const suppressHoverRef = useRef(false);
   const expanded = hovered || pinned;
   const detailsId = `${project.id}-details`;
 
   useEffect(() => {
     const media = window.matchMedia(hoverQuery);
-    const onChange = () => setHovered(false);
+    const onChange = () => {
+      suppressHoverRef.current = false;
+      setHovered(false);
+    };
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
 
   function close(returnFocus = false) {
+    suppressHoverRef.current = true;
     setPinned(false);
     setHovered(false);
     if (returnFocus) toggleRef.current?.focus({ preventScroll: true });
@@ -68,22 +74,31 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
       aria-labelledby={`${project.id}-title`}
       style={{ "--project-accent": project.accentColor } as CSSProperties}
       onPointerMove={(event) => {
-        if (event.pointerType === "mouse" && window.matchMedia(hoverQuery).matches) {
+        if (!suppressHoverRef.current && event.pointerType === "mouse" && window.matchMedia(hoverQuery).matches) {
           setHovered(true);
         }
       }}
-      onPointerLeave={() => setHovered(false)}
+      onPointerLeave={() => {
+        suppressHoverRef.current = false;
+        setHovered(false);
+      }}
       onClick={(event) => {
         if (!expanded && !window.matchMedia(hoverQuery).matches && !(event.target as Element).closest("button, a") && !window.getSelection()?.toString()) open();
       }}
       onKeyDown={(event) => {
         if (event.key === "Escape" && expanded) { event.preventDefault(); close(true); }
       }}>
+      <div className="project-case-toolbar">
+        <WindowControls targetLabel={project.title} onClose={() => close()}
+          onMinimize={() => close()} onExpand={open} expanded={expanded} controlsId={detailsId} />
+        <span className="project-case-toolbar-title" aria-hidden="true">{project.title}</span>
+      </div>
+      <div className="project-case-body">
       <div className="project-case-media">
         <div className="project-case-frame">
           <Image src={project.image.src} alt={project.image.alt[locale]}
             width={project.image.width} height={project.image.height}
-            sizes="(min-width: 1100px) 440px, (min-width: 700px) 560px, calc(100vw - 80px)"
+            sizes="(min-width: 1100px) 380px, (min-width: 600px) 440px, (min-width: 420px) 336px, calc(100vw - 80px)"
             className="project-case-image" />
         </div>
       </div>
@@ -121,6 +136,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           {project.demoUrl && <a href={project.demoUrl}>{copy.visit}<span aria-hidden="true">↗</span></a>}
           {project.repositoryUrl && <a href={project.repositoryUrl}>{copy.source}<span aria-hidden="true">↗</span></a>}
         </div>}
+      </div>
       </div>
     </article>
   );
