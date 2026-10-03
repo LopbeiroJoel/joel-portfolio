@@ -183,4 +183,44 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    id: "project-demo",
+    title: "Projet Démo",
+    status: {
+      fr: "Projet fictif — démonstration visuelle",
+      en: "Fictional project — visual demonstration",
+      pt: "Projeto fictício — demonstração visual",
+    },
+    image: {
+      src: "/images/projects/project-demo.png",
+      alt: {
+        fr: "Image d’exemple du Projet Démo, un projet fictif",
+        en: "Example image for Projet Démo, a fictional project",
+        pt: "Imagem de exemplo do Projet Démo, um projeto fictício",
+      },
+      width: 1672,
+      height: 941,
+    },
+    accentColor: "#365c49",
+    content: {
+      fr: {
+        summary: ["Cette carte sert uniquement à tester la présentation, les interactions et l’équilibre visuel de la section Projets."],
+        intro: "Ce projet n’est pas un projet réel. Il est utilisé temporairement pour tester le comportement de plusieurs cartes de projet, leurs différents états d’affichage ainsi que les interactions sur ordinateur, tablette et mobile.",
+        sections: [],
+        conclusion: "",
+      },
+      en: {
+        summary: ["This card is used solely to test the presentation, interactions and visual balance of the Projects section."],
+        intro: "This is not a real project. It is temporarily used to test how multiple project cards behave, their different display states and their interactions on desktop, tablet and mobile.",
+        sections: [],
+        conclusion: "",
+      },
+      pt: {
+        summary: ["Esta carta serve apenas para testar a apresentação, as interações e o equilíbrio visual da secção Projetos."],
+        intro: "Este não é um projeto real. É utilizado temporariamente para testar o comportamento de várias cartas de projeto, os seus diferentes estados de apresentação e as interações em computador, tablet e telemóvel.",
+        sections: [],
+        conclusion: "",
+      },
+    },
+  },
 ];

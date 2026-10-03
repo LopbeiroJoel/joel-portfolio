@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import WindowControls from "@/components/ui/WindowControls";
 import type { CompetencyGroup } from "@/types";
 
 const hoverQuery = "(min-width: 1100px) and (hover: hover) and (pointer: fine)";
@@ -63,10 +62,6 @@ function Group({ group }: { group: CompetencyGroup }) {
           button.current?.focus({ preventScroll: true });
         }
       }}>
-      <div className="competency-window-toolbar">
-        <WindowControls targetLabel={t(group.title)} onClose={close} onMinimize={close}
-          onExpand={open} expanded={expanded} controlsId={`${id}-details`} />
-      </div>
       <h4 className="competency-group-heading">
         <button ref={button} type="button" className="competency-group-trigger"
           aria-expanded={expanded} aria-controls={`${id}-details`}
@@ -95,8 +90,8 @@ export default function CompetencyGroups({ groups, label }: { groups: Competency
       <div className="competency-groups-intro">
         <p className="competency-groups-label">{t(label)}</p>
         <p className="competency-groups-hint">
-          <span className="competency-hint-hover">{t("* Survolez une fenêtre pour explorer les compétences associées.")}</span>
-          <span className="competency-hint-tap">{t("* Appuyez sur une fenêtre pour explorer les compétences associées.")}</span>
+          <span className="competency-hint-hover">{t("* Survolez une carte pour découvrir le détail.")}</span>
+          <span className="competency-hint-tap">{t("* Appuyez sur une carte pour découvrir le détail.")}</span>
         </p>
       </div>
       <div className="competency-groups-grid" data-columns={groups.length}>

@@ -1,7 +1,6 @@
 import type { Locale } from "@/lib/i18n";
 
 type JourneyCopy = {
-  intro: string;
   hint: string;
   slider: string;
   stages: [string, string, string];
@@ -17,7 +16,6 @@ type JourneyCopy = {
 
 export const journeyCopy: Record<Locale, JourneyCopy> = {
   fr: {
-    intro: "Ce que je sais faire. Ce que je développe. Là où je veux aller.",
     hint: "Glissez pour explorer mon évolution",
     slider: "Explorer mon parcours de compétences",
     stages: ["Acquis", "En développement", "Spécialisation future"],
@@ -35,7 +33,6 @@ export const journeyCopy: Record<Locale, JourneyCopy> = {
     shortNames: [["Software", "Web", "Data & IA", "Cloud", "DevOps", "Sécurité"], ["Software avancé", "Systèmes", "Cloud & IA", "Projets"], ["Big Data", "Machine Learning", "NLP & IA générative", "Infrastructure", "Visualisation", "MLOps", "Sécurité & éthique"]],
   },
   en: {
-    intro: "What I can do. What I’m developing. Where I want to go.",
     hint: "Drag to explore my journey",
     slider: "Explore my skills journey",
     stages: ["Acquired", "In development", "Future specialisation"],
@@ -53,7 +50,6 @@ export const journeyCopy: Record<Locale, JourneyCopy> = {
     shortNames: [["Software", "Web", "Data & AI", "Cloud", "DevOps", "Security"], ["Advanced software", "Systems", "Cloud & AI", "Projects"], ["Big Data", "Machine Learning", "NLP & generative AI", "Infrastructure", "Visualisation", "MLOps", "Security & ethics"]],
   },
   pt: {
-    intro: "O que sei fazer. O que estou a desenvolver. Onde quero chegar.",
     hint: "Arraste para explorar o meu percurso",
     slider: "Explorar o meu percurso de competências",
     stages: ["Adquiridas", "Em desenvolvimento", "Especialização futura"],

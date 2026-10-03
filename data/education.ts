@@ -8,7 +8,9 @@ export const education: Education[] = [
     status: "Parcours à venir",
     description: [
       "Dans la continuité de ma Pré-MSc, je poursuivrai mon parcours au sein du Master of Science Big Data & Intelligence Artificielle d’EPITECH Strasbourg.",
-      "Cette formation me permettra d’approfondir mes compétences en data, intelligence artificielle, infrastructures cloud et traitement de données à grande échelle, avec une approche orientée vers des problématiques concrètes d’entreprise.",
+      "Cette formation me permettra d’approfondir mes compétences dans les domaines de la data, de l’intelligence artificielle, des infrastructures cloud et du traitement de données à grande échelle.",
+      "L’objectif est de développer une approche à la fois technique et appliquée, capable de répondre à des problématiques concrètes d’entreprise autour de la collecte, du traitement, de l’analyse, de la sécurisation et de la valorisation des données.",
+      "Cette spécialisation s’inscrit dans la continuité de mon parcours, avec la volonté de construire progressivement un profil à la croisée du développement informatique, de la data et de l’intelligence artificielle.",
     ],
     details: [
       "Big Data",
@@ -55,6 +57,8 @@ export const education: Education[] = [
     period: "2026 – 2027",
     description: [
       "Année préparatoire au parcours Master of Science d’EPITECH, conçue pour renforcer les fondamentaux en développement informatique avant une spécialisation en Big Data & Intelligence Artificielle.",
+      "La formation débute par une phase particulièrement intensive de 4 mois de “piscine”, pensée comme une période de préparation à rythme soutenu. Elle repose sur une forte mise en pratique, un volume de travail important et une progression rapide autour de la programmation, du développement logiciel et des méthodes de résolution de problèmes.",
+      "Cette Pré-MSc a pour objectif de consolider les bases techniques nécessaires pour intégrer ensuite le Master of Science dans de bonnes conditions, tout en développant l’autonomie, la rigueur et la capacité à travailler sur des projets informatiques concrets.",
     ],
     details: [
       "Python",
@@ -111,7 +115,9 @@ export const education: Education[] = [
     institution: "ESGM Pro Format / Pigier Mulhouse",
     period: "2024 – 2026",
     description: [
-      "J’ai initialement suivi un parcours en DCG, orienté vers la comptabilité, la finance, la fiscalité et la gestion d’entreprise. À l’issue de ce parcours, j’ai obtenu une équivalence de BTS Comptabilité et Gestion, venant valider les compétences acquises au cours de ma formation.",
+      "J’ai initialement suivi un parcours en DCG, orienté vers la comptabilité, la finance, la fiscalité et la gestion d’entreprise. Cette formation m’a permis d’acquérir des bases solides en comptabilité générale et analytique, en gestion financière, en fiscalité ainsi qu’en utilisation d’outils de gestion tels qu’Excel et les PGI.",
+      "Au fil de ce parcours, j’ai également développé une approche plus structurée de l’analyse des données financières, du suivi des opérations et de l’optimisation de certains processus de gestion.",
+      "À l’issue de cette formation, j’ai obtenu une équivalence de BTS Comptabilité et Gestion, venant valider les compétences acquises au cours de mon parcours.",
     ],
     details: [
       "Comptabilité générale",

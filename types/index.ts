@@ -40,6 +40,7 @@ export type SkillCategory = { category: string; skills: string[] };
 export type Project = {
   id: string;
   title: string;
+  status?: Record<"fr" | "en" | "pt", string>;
   image: {
     src: string;
     alt: Record<"fr" | "en" | "pt", string>;

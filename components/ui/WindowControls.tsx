@@ -12,9 +12,9 @@ type Props = {
 };
 
 const copy = {
-  fr: { close: "Fermer le détail", minimize: "Réduire la fenêtre", expand: "Afficher toutes les informations" },
-  en: { close: "Close details", minimize: "Minimize window", expand: "Show all information" },
-  pt: { close: "Fechar os detalhes", minimize: "Minimizar a janela", expand: "Mostrar todas as informações" },
+  fr: { close: "Masquer le projet", minimize: "Réduire le projet", expand: "Agrandir le projet" },
+  en: { close: "Hide project", minimize: "Minimize project", expand: "Expand project" },
+  pt: { close: "Ocultar o projeto", minimize: "Minimizar o projeto", expand: "Ampliar o projeto" },
 };
 
 export default function WindowControls({ targetLabel, onClose, onMinimize, onExpand, expanded, controlsId }: Props) {
@@ -31,7 +31,7 @@ export default function WindowControls({ targetLabel, onClose, onMinimize, onExp
       {actions.map(action => <button key={action.kind} type="button"
         className={`window-control window-control--${action.kind}`}
         aria-label={`${action.label} — ${targetLabel}`} title={action.label}
-        aria-controls={controlsId} aria-expanded={expanded} onClick={action.handler}>
+        aria-controls={controlsId} aria-expanded={action.kind === "expand" ? expanded : undefined} onClick={action.handler}>
         <span className="window-control-dot" aria-hidden="true">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
             <path d={action.path} />

@@ -38,7 +38,6 @@ export default function SkillsJourney() {
   return (
     <div className="skills-journey">
       <div className="sj-heading">
-        <p>{copy.intro}</p>
         <label className="sj-instruction" htmlFor={`${id}-slider`}>
           <span aria-hidden="true">↔</span> {copy.hint}
         </label>
