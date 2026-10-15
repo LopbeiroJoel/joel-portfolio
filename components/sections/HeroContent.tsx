@@ -22,7 +22,7 @@ export default function HeroContent({ hasPhoto, hasCV }: { hasPhoto: boolean; ha
         <p className="hero-role">{t("Developer — Data & AI")}</p>
         <p className="hero-intro">{t("Du développement informatique à la donnée et à l’intelligence artificielle.")}</p>
         <div className="hero-availability">
-          <p>{t("Recherche d’alternance · Janvier 2027 · 1 à 3 ans")}</p>
+          <p>{t("À la recherche d’une alternance ou d’un stage de 6 mois · Janvier 2027")}</p>
           <p>{t(profile.rhythm)}</p>
         </div>
         <p className="location">{profile.location}</p>

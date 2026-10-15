@@ -26,7 +26,7 @@ export default function AboutJourney() {
   }, []);
   return (
     <figure className="about-journey" ref={ref} data-running="false">
-      <svg viewBox="0 0 400 425" role="img" aria-label={t("Mon parcours : Université, Casino, ESGM, CRIT, EPITECH, puis votre entreprise pour une future alternance.")}>
+      <svg viewBox="0 0 400 425" role="img" aria-label={t("Mon parcours : Université, Casino, ESGM, CRIT, EPITECH, puis votre entreprise pour une alternance ou un stage de 6 mois.")}>
         <g className="journey-paths" fill="none">
           <path d="M12 110H382M12 250H382M12 390H382" />
           <path className="journey-connection" d="M382 110V140H22V250M382 250V280H22V390" />
@@ -43,7 +43,7 @@ export default function AboutJourney() {
               {kind === "casino" && <path className="journey-detail" d="M-2-43h4v4h4v4H2v4h-4v-4h-4v-4h4z" />}
               {kind === "tech" && <path className="journey-detail" d="M-4-42h-4v8h4v-2h-2v-4h2zM4-42h4v8H4v-2h2v-4H4z" />}
             </g>
-            {kind === "future" && <text className="journey-future" x="0" y="20" textAnchor="middle">{t("Future alternance")}</text>}
+            {kind === "future" && <text className="journey-future" x="0" y="20" textAnchor="middle">{t("Alternance / stage")}</text>}
           </g>
         ))}
         <g className="journey-actor" fill="currentColor" shapeRendering="crispEdges" aria-hidden="true">

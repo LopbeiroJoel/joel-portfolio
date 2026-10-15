@@ -18,7 +18,7 @@ export default function Contact() {
       />
       <div className="contact-grid">
         <div>
-          <p className="contact-intro">{t("Pour échanger sur une alternance en développement informatique.")}</p>
+          <p className="contact-intro">{t("Pour échanger sur une alternance ou un stage de 6 mois en développement informatique.")}</p>
           <address>
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
             <a href={profile.phoneHref}>{profile.phone}</a>

@@ -7,8 +7,8 @@ export const profile = {
   birthDate: "23/05/2002",
   license: "Permis B",
   objective:
-    "Je suis à la recherche d’une alternance de 1 à 3 ans à partir de janvier 2027, orientée développement informatique, avec pour objectif de me spécialiser en Big Data & Intelligence Artificielle suite à une Pré-MSc.",
-  rhythm: "6 semaines en entreprise / 2 semaines en école.",
+    "Je recherche une alternance ou un stage de 6 mois à partir de janvier 2027, en développement informatique, pour me spécialiser en Big Data & Intelligence Artificielle après une Pré-MSc.",
+  rhythm: "En alternance : 6 semaines en entreprise / 2 semaines en école.",
   photoPath: "/images/profile.png",
   cvPath: "/documents/cv.pdf",
 };
