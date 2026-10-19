@@ -50,8 +50,9 @@
 .project-case-content .project-case-conclusion { margin-top: 1.75rem; padding-left: 1rem; border-left: 1px solid var(--project-accent); color: var(--color-text); }
 .project-case-technologies { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin-top: 1rem; }
 .project-case-technologies li { border: 1px solid var(--color-border); padding: .15rem .5rem; border-radius: .3rem; font-size: .75rem; color: var(--color-text-secondary); }
-.project-case-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.5rem; font-size: .8125rem; }
-.project-case-links a { display: inline-flex; gap: .5rem; }
+.project-case-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: .25rem; font-size: .8125rem; }
+.project-case-links a { display: inline-flex; align-items: center; min-height: 44px; gap: .5rem; }
+.project-case[data-view="expanded"] .project-case-links { margin-bottom: 1.25rem; }
 .project-case[data-view="compact"] .project-case-body { grid-template-columns: 64px minmax(0, 1fr); align-items: center; padding: 1rem; gap: 1rem; }
 .project-case[data-view="compact"] .project-case-media { width: 64px; }
 .project-case[data-view="compact"] .project-case-frame { padding: 3px; border-radius: .5rem; }
@@ -68,6 +69,7 @@
 .scroll-companion[data-section="projects"] { visibility: hidden; }
 @media (min-width: 900px) {
   .project-case-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-case-list > .project-case:only-child:not([data-view="expanded"]) { grid-column: 1 / -1; width: min(100%, 548px); justify-self: center; }
   .project-case[data-view="expanded"] .project-case-body { grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr); gap: 3rem; }
   .project-case[data-view="expanded"] .project-case-media { position: sticky; top: 7rem; width: min(100%, 380px); }
 }

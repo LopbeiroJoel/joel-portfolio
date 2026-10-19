@@ -68,6 +68,10 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
             onClick={() => view === "normal" ? setView("expanded") : normal()}>
             {view === "normal" ? labels.detail : labels.normal}<span aria-hidden="true">{view === "normal" ? "+" : "−"}</span>
           </button>
+          {view !== "compact" && (project.demoUrl || project.repositoryUrl) && <div className="project-case-links">
+            {project.demoUrl && <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">{labels.visit}<span aria-hidden="true">↗</span></a>}
+            {project.repositoryUrl && <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">{labels.source}<span aria-hidden="true">↗</span></a>}
+          </div>}
           <div id={detailsId} className="project-case-details" hidden={!expanded}>
             <p className="project-case-intro">{content.intro}</p>
             {content.sections.map(section => <div className="project-case-topic" key={section.title}>
@@ -78,10 +82,6 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
             {Boolean(project.technologies?.length) && <ul className="project-case-technologies" aria-label="Technologies">
               {project.technologies!.map(technology => <li key={technology}>{technology}</li>)}
             </ul>}
-            {(project.demoUrl || project.repositoryUrl) && <div className="project-case-links">
-              {project.demoUrl && <a href={project.demoUrl}>{labels.visit}<span aria-hidden="true">↗</span></a>}
-              {project.repositoryUrl && <a href={project.repositoryUrl}>{labels.source}<span aria-hidden="true">↗</span></a>}
-            </div>}
             <button type="button" className="project-case-close" onClick={() => normal(true)}>{labels.normal}<span aria-hidden="true">↑</span></button>
           </div>
         </div>
