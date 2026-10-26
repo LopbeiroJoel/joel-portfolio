@@ -77,9 +77,11 @@ export default function ContactForm() {
       aria-describedby="form-notice"
       aria-busy={sending}
     >
+      <h3>{t("Parlons de votre projet.")}</h3>
       <p id="form-notice" className="form-notice">{t(configured
-        ? "Tous les champs sont obligatoires. Votre message sera transmis via Formspree pour me permettre de vous répondre."
+        ? "Tous les champs sont obligatoires. Le message est envoyé via Formspree."
         : "Le formulaire n’est pas encore disponible. Pour me joindre, utilisez directement mon adresse email ou mon téléphone.")}</p>
+      <div className="contact-fields">
       {fields.map((field) => (
         <div className="field" key={field.name}>
           <label htmlFor={`contact-${field.name}`}>{t(field.label)}</label>
@@ -87,7 +89,7 @@ export default function ContactForm() {
             <textarea
               id={`contact-${field.name}`}
               name={field.name}
-              rows={5}
+              rows={4}
               maxLength={field.maxLength}
               required
               readOnly={sending}
@@ -124,7 +126,8 @@ export default function ContactForm() {
           )}
         </div>
       ))}
-      <button type="submit" className="button" disabled={sending || !configured}>{t(sending ? "Envoi en cours…" : "Envoyer le message")}</button>
+      </div>
+      <button type="submit" className="button" disabled={sending || !configured}>{t(sending ? "Envoi en cours…" : "Envoyer le message")}<span aria-hidden="true">↗</span></button>
       {sendError && <p className="error" role="alert">{t(sendError)}</p>}
       <div role="status" aria-live="polite">
         {submitted && (

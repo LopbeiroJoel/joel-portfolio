@@ -70,7 +70,12 @@ export type Language = {
   locale: string;
 };
 export type Certification = { name: string; status?: "En cours" };
-export type Interest = { name: string; description: string };
+export type Interest = {
+  name: string;
+  description: string;
+  details?: string[];
+  sections?: { title: string; description: string }[];
+};
 
 export type SkillStage = {
   id: "acquired" | "in-progress" | "upcoming";

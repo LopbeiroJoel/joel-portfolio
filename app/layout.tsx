@@ -19,6 +19,7 @@ import "./section-headings.css";
 import "./competency-groups.css";
 import "./window-controls.css";
 import "./visual-polish.css";
+import "./selected-refinements.css";
 import ScrollCompanion from "@/components/ui/ScrollCompanion";
 export const metadata: Metadata = {
   title: "Joel Lopes Ribeiro | Portfolio",

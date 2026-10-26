@@ -10,7 +10,7 @@ export default function Interests() {
         id="interests-title"
         title="Centres d’intérêt"
       />
-      <div className="grid">
+      <div className="grid interests-grid">
         {interests.map((interest) => (
           <article
             className="card interest-card"
@@ -18,7 +18,14 @@ export default function Interests() {
             tabIndex={0}
           >
             <h3>{t(interest.name)}</h3>
-            <p className="muted">{t(interest.description)}</p>
+            {interest.description && <p className="muted">{t(interest.description)}</p>}
+            {interest.details?.map((detail) => <p className="interest-detail" key={detail}>{t(detail)}</p>)}
+            {interest.sections?.map((section) => (
+              <div className="interest-sport" key={section.title}>
+                <h4>{t(section.title)}</h4>
+                <p>{t(section.description)}</p>
+              </div>
+            ))}
             <div className="interest-art" aria-hidden="true">
               {interest.name === "Poker" ? (
                 <div className="playing-cards">
@@ -29,7 +36,7 @@ export default function Interests() {
                     A<br />♥
                   </span>
                 </div>
-              ) : (
+              ) : interest.name === "Sport" ? (
                 <svg
                   className="sport-art"
                   viewBox="0 0 64 64"
@@ -45,6 +52,10 @@ export default function Interests() {
                     d="M32 22v18m0-13-13-6-8 8m21-2 12 7 9-12M32 40 20 54m12-14 16 5 6 10"
                   />
                   <path stroke="#789883" d="m26 36 12 3m-5-1 5 9" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M32 51 12 31C-1 18 17 4 32 20 47 4 65 18 52 31Z" />
                 </svg>
               )}
             </div>

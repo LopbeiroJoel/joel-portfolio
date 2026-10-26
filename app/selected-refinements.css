@@ -1,0 +1,110 @@
+/* Éléments retenus du portfolio Epitech : double culture et contact. */
+.about-with-culture {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: 80px;
+  align-items: center;
+}
+.about-culture-note { text-align: center; }
+.about-culture-note > p,
+.about-culture-note > span {
+  display: block;
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+.about-culture-note > span { color: var(--color-primary); }
+.about-culture .about-journey { width: min(100%, 280px); margin: 24px auto 0; }
+.interest-card .interest-detail { font-size: 0.875rem; color: var(--color-text-secondary); }
+.interest-sport { margin-top: 20px; }
+.interest-sport h4 { margin: 0; font-size: 0.875rem; color: var(--color-primary); }
+.interest-sport p { margin-top: 8px; font-size: 0.875rem; color: var(--color-text-secondary); }
+.interest-sport + .interest-sport { padding-top: 16px; border-top: 1px solid var(--color-border); }
+.interest-card .interest-art svg { width: 100%; height: 64px; }
+
+/* Le panneau contact reste isolé du reste de la palette. */
+.contact-panel {
+  --contact-green: #294b3c;
+  background: var(--contact-green);
+  color: var(--color-background);
+  padding-block: 80px;
+}
+.contact-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 70px;
+  align-items: start;
+}
+.contact-panel-copy .eyebrow { color: #c6d2b9; font-size: 11px; letter-spacing: 0.12em; }
+.contact-panel-copy h2 {
+  margin: 24px 0;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+.contact-panel-copy h2 > span { display: block; }
+.contact-panel .contact-intro {
+  max-width: 360px;
+  font-size: 13px;
+  color: #d3ddd3;
+  margin: 0;
+}
+.contact-panel address { gap: 8px; margin-top: 32px; font-size: 12px; }
+.contact-panel address span { color: #d3ddd3; font-size: 11px; }
+.contact-panel-copy a { color: inherit; text-decoration: none; }
+.contact-panel-copy a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
+.contact-panel-copy :focus-visible { outline-color: #fff; }
+.contact-panel .social-links { gap: 28px; margin-top: 28px; font-size: 11px; }
+.contact-panel .contact-form {
+  display: block;
+  padding: 30px;
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.contact-panel .contact-form h3 { margin-bottom: 8px; font-size: 21px; font-weight: 600; letter-spacing: -0.03em; }
+.contact-panel .form-notice { margin-bottom: 24px; font-size: 11px; }
+.contact-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.contact-fields .field:nth-child(n + 3) { grid-column: 1 / -1; }
+.contact-panel label { font-size: 11px; font-weight: 600; }
+.contact-panel input,
+.contact-panel textarea {
+  padding: 10px 12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  font-size: 14px;
+}
+.contact-panel [aria-invalid="true"] { border-color: var(--color-error); }
+.contact-panel .contact-form .button {
+  width: 100%;
+  margin-top: 22px;
+  justify-content: space-between;
+  background: var(--contact-green);
+  border-color: var(--contact-green);
+  font-size: 13px;
+  padding: 14px 22px;
+  border-radius: 4px;
+}
+.contact-panel .contact-form .button:hover { background: #1d382c; }
+.contact-panel .contact-form .error { margin-top: 8px; }
+.contact-panel .contact-form .success { margin-top: 18px; }
+
+@media (max-width: 1000px) {
+  .about-with-culture { gap: 40px; }
+  .contact-panel-grid { gap: 40px; }
+}
+@media (max-width: 700px) {
+  .about-with-culture { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .about-culture-note > p,
+  .about-culture-note > span { font-size: 25px; }
+  .about-culture-note { text-align: left; }
+  .contact-panel { padding-block: 48px; }
+  .contact-panel-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .contact-panel-copy h2 { font-size: clamp(34px, 10vw, 42px); }
+  .contact-panel .contact-form { padding: 24px 20px; }
+  .contact-fields { grid-template-columns: minmax(0, 1fr); }
+}

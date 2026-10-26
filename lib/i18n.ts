@@ -3,6 +3,23 @@ import { education } from "@/data/education";
 export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
+  "Une double culture.": ["Two complementary perspectives.", "Uma dupla perspetiva."],
+  "Métier & technique.": ["Business & technology.", "Negócio e tecnologia."],
+  "À partir de janvier 2027": ["From January 2027", "A partir de janeiro de 2027"],
+  "Et si la suite": ["What if we", "E se o próximo passo"],
+  "se construisait": ["built what’s next", "fosse construído"],
+  "ensemble ?": ["together?", "em conjunto?"],
+  "Mon CV": ["My CV", "O meu CV"],
+  "68300 Saint-Louis, France": ["68300 Saint-Louis, France", "68300 Saint-Louis, França"],
+  "Parlons de votre projet.": ["Let’s talk about your project.", "Vamos falar do seu projeto."],
+  "Tous les champs sont obligatoires. Le message est envoyé via Formspree.": ["All fields are required. Your message is sent via Formspree.", "Todos os campos são obrigatórios. A mensagem é enviada através do Formspree."],
+  "Joueur indépendant, je participe à des tournois de loisir et à des compétitions plus exigeantes.": ["As an independent player, I take part in recreational tournaments and more competitive events.", "Como jogador independente, participo em torneios de lazer e em competições mais exigentes."],
+  "Football": ["Football", "Futebol"],
+  "Ancien pratiquant en loisir, je suis avec passion le football professionnel, son actualité et les matchs locaux.": ["A former recreational player, I keenly follow professional football, its news and local matches.", "Antigo praticante por lazer, acompanho com paixão o futebol profissional, a sua atualidade e os jogos locais."],
+  "Arts martiaux mixtes": ["Mixed martial arts", "Artes marciais mistas"],
+  "Grade vert obtenu après plusieurs années de pratique en loisir.": ["Green grade earned after several years of recreational training.", "Graduação verde obtida após vários anos de prática por lazer."],
+  "Bénévolat": ["Volunteering", "Voluntariado"],
+  "Engagement solidaire en tant que militant et donateur de l’association.": ["Supporting the organisation’s work as an advocate and donor.", "Apoio às ações da associação como ativista e doador."],
   "* Survolez une carte pour découvrir le détail.": ["* Hover over a card to see the details.", "* Passe o cursor sobre uma carta para ver os detalhes."],
   "* Appuyez sur une carte pour découvrir le détail.": ["* Tap a card to see the details.", "* Toque numa carta para ver os detalhes."],
   "Tous les champs sont obligatoires. Votre message sera transmis via Formspree pour me permettre de vous répondre.": ["All fields are required. Your message will be sent via Formspree so I can reply to you.", "Todos os campos são obrigatórios. A sua mensagem será enviada através do Formspree para que eu lhe possa responder."],
