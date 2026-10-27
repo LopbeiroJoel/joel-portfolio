@@ -66,7 +66,10 @@ export default function Navigation() {
         aria-controls="main-navigation"
         onClick={() => setOpen(!open)}
       >
-        {t(open ? "Fermer le menu" : "Ouvrir le menu")}
+        <svg className="menu-toggle-icon" aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <path d={open ? "m6 6 12 12M6 18 18 6" : "M4 7h16M4 12h16M4 17h16"} />
+        </svg>
+        <span className="menu-toggle-label">{t(open ? "Fermer le menu" : "Ouvrir le menu")}</span>
       </button>
       <ul id="main-navigation" className={`nav-links${open ? " is-open" : ""}`}>
         {links.map(([id, label]) => (

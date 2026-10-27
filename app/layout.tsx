@@ -4,6 +4,8 @@ import "./i18n.css";
 import "./about-journey.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
+import { themeBootstrap } from "@/lib/theme";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -21,6 +23,7 @@ import "./window-controls.css";
 import "./visual-polish.css";
 import "./selected-refinements.css";
 import "./reader-guidance.css";
+import "./header-theme.css";
 import ScrollCompanion from "@/components/ui/ScrollCompanion";
 export const metadata: Metadata = {
   title: "Joel Lopes Ribeiro | Portfolio",
@@ -29,8 +32,9 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body>
+        <Script id="portfolio-theme" strategy="beforeInteractive">{themeBootstrap}</Script>
         <LocaleProvider>
         <SkipLink />
         <ScrollCompanion>
