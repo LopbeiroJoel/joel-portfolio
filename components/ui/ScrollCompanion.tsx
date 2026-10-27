@@ -1,376 +1,156 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import CompanionProps from "@/components/ui/CompanionProps";
-import { createCompanionScenes } from "@/lib/companion-scenes";
-import { createCompanionFall } from "@/lib/companion-fall";
-import { createCompanionJump } from "@/lib/companion-jump";
-import {
-  createCompanionClicks,
-  type CompanionClickState,
-} from "@/lib/companion-clicks";
+import { followGuide, readerGuide } from "@/lib/reader-guide";
+import { createReaderGuideMotion } from "@/lib/reader-guide-motion";
+import { createFreeCompanionMotion } from "@/lib/companion-free-motion";
+import type { CompanionClickState } from "@/lib/companion-clicks";
 
-type Support = { element: HTMLElement; edge: "top" | "bottom" };
+const labels = {
+  fr: { invite: "José peut vous guider.", optIn: "Oui, je veux que José me guide", hint: "Il vous accompagne et explique chaque section, à votre rythme.", title: "Le conseil de José", stop: "Arrêter le guide", interact: "Interagir avec José", ask: "Comment vous appelez-vous ?", name: "Votre prénom", start: "Commencer la visite", privacy: "Votre prénom reste uniquement dans cette page, le temps de la visite.", empty: "Indiquez votre prénom pour commencer.", hello: (name: string) => `Bonjour ${name} !` },
+  en: { invite: "Let José guide you.", optIn: "Yes, I’d like José to guide me", hint: "He follows along and explains each section, at your own pace.", title: "José’s tip", stop: "Stop the guide", interact: "Interact with José", ask: "What’s your name?", name: "Your first name", start: "Start the tour", privacy: "Your first name stays on this page for this visit only.", empty: "Enter your first name to begin.", hello: (name: string) => `Hello ${name}!` },
+  pt: { invite: "O José pode guiar a visita.", optIn: "Sim, quero que o José me guie", hint: "Acompanha a leitura e explica cada secção, ao seu ritmo.", title: "A dica do José", stop: "Parar o guia", interact: "Interagir com o José", ask: "Como se chama?", name: "O seu primeiro nome", start: "Começar a visita", privacy: "O seu nome fica apenas nesta página durante a visita.", empty: "Indique o seu nome para começar.", hello: (name: string) => `Olá ${name}!` },
+};
 
-export default function ScrollCompanion() {
-  const { t } = useLocale();
-  const companionRef = useRef<HTMLDivElement>(null);
+type GuideState = {
+  enabled: boolean; requested: boolean; setRequested: (value: boolean) => void;
+  start: (name: string) => void; visitorName: string; section: string; overviewOpen: boolean;
+};
+const GuideContext = createContext<GuideState | null>(null);
+function useGuide() {
+  const value = useContext(GuideContext);
+  if (!value) throw new Error("José needs his guide provider.");
+  return value;
+}
+
+// Le dessin et les poses pixel-art d’origine sont conservés.
+function JoseSprite() {
+  return <svg aria-hidden="true" viewBox="0 0 20 30" width="20" height="30" shapeRendering="crispEdges" fill="currentColor">
+    <g className="pixel-standing">
+      <path d="M7 1h6v2h2v6h-2v2H7V9H5V3h2zM9 12h3v9H9z" />
+      <path className="pixel-arm-left" d="M6 13h3v3H6v4H3v-3h3z" />
+      <path className="pixel-arm-right" d="M12 13h3v4h3v3h-3v-4h-3z" />
+      <path className="pixel-legs-rest" d="M7 21h4v4H8v4H4v-3h3zM11 21h3v5h3v3h-5v-4h-1z" />
+      <path className="pixel-step-a" d="M8 21h3v8H5v-3h3zM11 21h4v3h3v3h-5v-3h-2z" />
+      <path className="pixel-step-b" d="M11 21h3v5h3v3h-6zM7 21h4v3H8v3H3v-3h4z" />
+    </g>
+    <g className="pixel-seated">
+      <path d="M7 9h6v2h2v6h-2v2H7v-2H5v-6h2zM9 20h3v7h4v2H8v-2H7v-6h2zM5 21h2v8H4v-2h1zM14 29h3v5h3v2h-6z" />
+    </g>
+    <CompanionProps />
+  </svg>;
+}
+
+export function GuidePreference() {
+  const guide = useGuide();
+  const { locale } = useLocale();
+  const [name, setName] = useState("");
+  const copy = labels[locale];
+  return <div className="jose-guide-preference" data-active={guide.enabled}>
+      <p className="jose-guide-invite-title">{copy.invite}</p>
+      <label htmlFor="jose-guide-opt-in">
+        <input id="jose-guide-opt-in" type="checkbox" checked={guide.requested} onChange={event => {
+          guide.setRequested(event.target.checked);
+          if (event.target.checked) requestAnimationFrame(() => {
+            document.getElementById("jose-visitor-name")?.focus();
+          });
+        }} />
+        <span>{copy.optIn}</span>
+      </label>
+      <p className="jose-guide-hint">{copy.hint}</p>
+      {guide.requested && !guide.enabled && <form className="jose-name-form" onSubmit={event => {
+        event.preventDefault();
+        const input = event.currentTarget.elements.namedItem("visitorName") as HTMLInputElement;
+        const cleanName = name.trim().replace(/\s+/g, " ").slice(0, 40);
+        if (!cleanName) { input.setCustomValidity(copy.empty); input.reportValidity(); return; }
+        guide.start(cleanName);
+        requestAnimationFrame(() => document.querySelector('.jose-guide-note[data-guide-stop="home"]')?.scrollIntoView({
+          block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        }));
+      }}>
+        <p>{copy.ask}</p>
+        <label htmlFor="jose-visitor-name">{copy.name}</label>
+        <div className="jose-name-fields">
+          <input id="jose-visitor-name" name="visitorName" autoComplete="given-name" maxLength={40} required value={name}
+            onChange={event => { event.target.setCustomValidity(""); setName(event.target.value); }} />
+          <button type="submit">{copy.start}<span aria-hidden="true"> →</span></button>
+        </div>
+        <small>{copy.privacy}</small>
+      </form>}
+  </div>;
+}
+
+/** Le petit repère réserve la place de la bulle à l’entrée de chaque section. */
+export function GuideNote({ section }: { section: string }) {
+  const guide = useGuide();
+  if (!guide.enabled) return null;
+  return <div className="jose-guide-note" data-guide-stop={section} data-current={guide.section === section} aria-hidden="true" />;
+}
+
+export default function ScrollCompanion({ children }: { children: ReactNode }) {
+  const { locale } = useLocale();
+  const [requested, setRequested] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [visitorName, setVisitorName] = useState("");
+  const [section, setSection] = useState("home");
+  const [overviewOpen, setOverviewOpen] = useState(false);
+  const spriteRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const captionRef = useRef<HTMLSpanElement>(null);
+  const edgeRef = useRef<HTMLSpanElement>(null);
+  const speechRef = useRef<HTMLDivElement>(null);
   const clickState = useRef<CompanionClickState>({ count: 0, departed: false });
-  useEffect(() => {
-    const element = companionRef.current;
-    if (!element || !buttonRef.current || !captionRef.current) return;
-    const sprite = element;
-    const button = buttonRef.current;
-    const caption = captionRef.current;
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let dispose = () => {};
+  const stepKey = overviewOpen && (section === "skills" || section === "projects") ? `${section}Complete` : section;
+  const step = readerGuide[locale][stepKey] ?? readerGuide[locale].home;
 
-    function configure() {
-      dispose();
-      sprite.hidden = true;
-      sprite.style.removeProperty("opacity");
-      if (motion.matches || clickState.current.departed) return;
-      const elements = Array.from(
-        document.querySelectorAll<HTMLElement>("main .section, main .card, #home .profile-panel"),
-      );
-      const supports: Support[] = elements.flatMap((element) => {
-        const style = getComputedStyle(element);
-        const edges: Support[] = [];
-        if (parseFloat(style.borderTopWidth) > 0)
-          edges.push({ element, edge: "top" });
-        if (element.matches(".card") && parseFloat(style.borderBottomWidth) > 0)
-          edges.push({ element, edge: "bottom" });
-        return edges;
-      });
-      let support: Support | undefined;
-      let frame = 0;
-      let lastScroll = -Infinity;
-      let previousFrame = 0;
-      let supportSince = 0;
-      let followUntil = 0;
-      let walkOffset = 40;
-      let direction = 1;
-      let walkMin = 40;
-      let walkMax = 96;
-      let hasAppeared = false;
-      let allowReturn = false;
-      let scrollDirection = 1;
-      let previousScroll = window.scrollY;
-      const jump = createCompanionJump(sprite);
-      const fall = createCompanionFall(sprite, () => {
-        support = undefined;
-        allowReturn = true;
-        measure(true);
-      });
-
-      const clicks = createCompanionClicks({
-        sprite,
-        button,
-        caption,
-        state: clickState.current,
-        isSettled: () => !jump.isActive() && !fall.isActive() && !!support,
-        surface: () => (support ? surface(support) : undefined),
-        pause: () => {
-          jump.cancel();
-          fall.dispose();
-          cancelAnimationFrame(frame);
-          frame = 0;
-        },
-      });
-      const disposeScenes = createCompanionScenes(sprite, caption);
-
-      function surface(item: Support) {
-        const rect = item.element.getBoundingClientRect();
-        return {
-          left: rect.left + 20,
-          right: rect.right - 40,
-          y: item.edge === "top" ? rect.top : rect.bottom - 1,
-        };
-      }
-      function position(item: Support, offset = walkOffset) {
-        const rect = item.element.getBoundingClientRect();
-        const bounds = surface(item);
-        return {
-          x: Math.max(bounds.left, Math.min(bounds.right, rect.right - offset)),
-          y: bounds.y,
-        };
-      }
-      function labelSupport(item: Support) {
-        const section = item.element.closest('main > section');
-        sprite.dataset.section = section?.id || section?.getAttribute('aria-labelledby')?.replace('-title', '') || '';
-        sprite.dataset.supportIndex = String(elements.indexOf(item.element));
-        sprite.dataset.supportEdge = item.edge;
-      }
-      function paint(now: number) {
-        if (!support || clicks.isBusy() || fall.isActive() || jump.isActive())
-          return;
-        const elapsed = previousFrame ? Math.min(now - previousFrame, 48) : 16;
-        previousFrame = now;
-        const walking = now - lastScroll < 700;
-        if (walking) {
-          walkOffset += direction * elapsed * 0.032;
-          if (walkOffset >= walkMax || walkOffset <= walkMin) {
-            walkOffset = Math.max(walkMin, Math.min(walkMax, walkOffset));
-            direction *= -1;
-          }
-        }
-        const point = position(support);
-        sprite.style.transform = `translate3d(${point.x}px, ${point.y - 29}px, 0)`;
-        sprite.dataset.pose = walking
-          ? "walk"
-          : support.element.matches(".card")
-            ? "sit"
-            : "idle";
-        labelSupport(support);
-        if ((walking || now < followUntil) && !frame)
-          frame = requestAnimationFrame(animate);
-      }
-      function animate(now: number) {
-        frame = 0;
-        paint(now);
-      }
-
-      function travel(target: Support, entering = false) {
-        cancelAnimationFrame(frame);
-        frame = 0;
-        const source = support;
-        const originOffset = walkOffset;
-        const currentX = source
-          ? position(source).x
-          : position(target, 64).x - 12;
-        const bounds = surface(target);
-        const landingX = Math.max(
-          bounds.left,
-          Math.min(bounds.right, currentX + 18 * direction),
-        );
-        const landingOffset =
-          target.element.getBoundingClientRect().right - landingX;
-        const destination = () => position(target, landingOffset);
-        const origin = source
-          ? () => position(source, originOffset)
-          : () => {
-              const point = destination();
-              return { x: point.x - 12, y: point.y - 20 };
-            };
-        sprite.hidden = false;
-        hasAppeared = true;
-        labelSupport(target);
-        jump.start(
-          origin,
-          destination,
-          () => {
-            support = target;
-            supportSince = performance.now();
-            walkOffset = landingOffset;
-            walkMin = Math.max(40, landingOffset - 28);
-            walkMax = Math.max(walkMin + 24, landingOffset + 28);
-            lastScroll = performance.now();
-            // Reprise sans recalage : la marche démarre au point exact de réception.
-            paint(lastScroll);
-          },
-          entering,
-        );
-      }
-
-      function measure(isScroll: boolean) {
-        if (clicks.isBusy() || fall.isActive() || jump.isActive()) return;
-        const now = performance.now();
-        if (isScroll) lastScroll = now;
-        const headerBottom =
-          document.querySelector("header")?.getBoundingClientRect().bottom ??
-          80;
-        const visible = (item: Support) => {
-          const point = surface(item);
-          return point.y >= headerBottom + 32 && point.y <= innerHeight + 8;
-        };
-        const candidates = supports.filter(visible);
-        if (window.scrollY < 40) {
-          // L'accueil ajoute uniquement une pose calme, posée sur le cadre existant.
-          const home = candidates.find((item) => item.element.matches('#home .profile-panel'));
-          if (home) {
-            support = home;
-            sprite.hidden = false;
-            paint(now);
-            return;
-          }
-          sprite.hidden = true;
-          support = undefined;
-          return;
-        }
-        if (support) {
-          const current = position(support);
-          // Seuls les petits écarts sont franchis, pas de bonds entre blocs éloignés.
-          const nearby = candidates
-            .filter((candidate) => {
-              if (candidate === support) return false;
-              const target = surface(candidate);
-              const dx = Math.max(
-                target.left - current.x,
-                current.x - target.right,
-                0,
-              );
-              const dy = target.y - current.y;
-              return (
-                dx <= 110 && dy * scrollDirection > 8 && dy >= -80 && dy <= 135
-              );
-            })
-            .sort(
-              (a, b) =>
-                Math.abs(surface(a).y - current.y) -
-                Math.abs(surface(b).y - current.y),
-            );
-          const next = nearby[0];
-          const nearExit =
-            current.y < headerBottom + 70 || current.y > innerHeight - 45;
-          if (
-            next &&
-            (nearExit ||
-              (now - supportSince > 950 &&
-                Math.abs(surface(next).y - innerHeight * 0.62) + 12 <
-                  Math.abs(current.y - innerHeight * 0.62)))
-          ) {
-            travel(next);
-            return;
-          }
-          if (current.y >= headerBottom - 8 && current.y <= innerHeight + 36) {
-            sprite.hidden = false;
-            paint(now);
-            return;
-          }
-          // Le support et le personnage ont quitté l'écran ensemble.
-          sprite.hidden = true;
-          support = undefined;
-          cancelAnimationFrame(frame);
-          frame = 0;
-        }
-        // Après une sortie d'écran, revenir sur une surface qui entre à son tour.
-        const arrivals =
-          hasAppeared && !allowReturn
-            ? candidates.filter((item) => {
-                const y = surface(item).y;
-                return scrollDirection > 0
-                  ? y > innerHeight - 95
-                  : y < headerBottom + 95;
-              })
-            : candidates;
-        const target = arrivals.sort(
-          (a, b) =>
-            Math.abs(surface(a).y - innerHeight * 0.62) -
-            Math.abs(surface(b).y - innerHeight * 0.62),
-        )[0];
-        if (target) {
-          allowReturn = false;
-          travel(target, true);
-        } else sprite.hidden = true;
-      }
-
-      const onScroll = () => {
-        if (clicks.isBusy()) return;
-        const delta = window.scrollY - previousScroll;
-        if (delta) scrollDirection = Math.sign(delta);
-        previousScroll = window.scrollY;
-        if (fall.handleScroll()) {
-          jump.cancel();
-          cancelAnimationFrame(frame);
-          frame = 0;
-          return;
-        }
-        measure(true);
-      };
-      const onResize = () => measure(false);
-      const onSupportMotion = (event: Event) => {
-        if (event.currentTarget !== support?.element) return;
-        followUntil = performance.now() + 300;
-        paint(performance.now());
-      };
-      elements.forEach((item) => {
-        item.addEventListener("pointerenter", onSupportMotion);
-        item.addEventListener("pointerleave", onSupportMotion);
-      });
-      const observer = new ResizeObserver(onResize);
-      elements.forEach((item) => observer.observe(item));
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onResize);
-      measure(false);
-      dispose = () => {
-        disposeScenes();
-        clicks.dispose();
-        jump.cancel();
-        fall.dispose();
-        cancelAnimationFrame(frame);
-        observer.disconnect();
-        elements.forEach((item) => {
-          item.removeEventListener("pointerenter", onSupportMotion);
-          item.removeEventListener("pointerleave", onSupportMotion);
-        });
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onResize);
-      };
+  function requestGuide(value: boolean) {
+    setRequested(value);
+    if (!value) setEnabled(false);
+  }
+  function startGuide(name: string) {
+    if (clickState.current.departed || clickState.current.count >= 3) {
+      clickState.current.count = 0;
+      clickState.current.departed = false;
     }
-    configure();
-    motion.addEventListener("change", configure);
-    return () => {
-      dispose();
-      motion.removeEventListener("change", configure);
-    };
+    setVisitorName(name);
+    setEnabled(true);
+  }
+
+  useEffect(() => {
+    const overview = document.getElementById("skills-overview");
+    function update() { setOverviewOpen(overview instanceof HTMLDetailsElement && overview.open); }
+    overview?.addEventListener("toggle", update);
+    update();
+    return () => overview?.removeEventListener("toggle", update);
   }, []);
 
-  return (
-    <>
-      <div
-        ref={companionRef}
-        className="scroll-companion"
-        hidden
-        data-pose="idle"
-      >
-        <button
-          ref={buttonRef}
-          type="button"
-          className="companion-hitbox"
-          aria-label={t("Interagir avec le personnage")}
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 20 30"
-            width="20"
-            height="30"
-            shapeRendering="crispEdges"
-            fill="currentColor"
-          >
-            <g className="pixel-standing">
-              <path d="M7 1h6v2h2v6h-2v2H7V9H5V3h2zM9 12h3v9H9z" />
-              <path className="pixel-arm-left" d="M6 13h3v3H6v4H3v-3h3z" />
-              <path className="pixel-arm-right" d="M12 13h3v4h3v3h-3v-4h-3z" />
-              <path
-                className="pixel-legs-rest"
-                d="M7 21h4v4H8v4H4v-3h3zM11 21h3v5h3v3h-5v-4h-1z"
-              />
-              <path
-                className="pixel-step-a"
-                d="M8 21h3v8H5v-3h3zM11 21h4v3h3v3h-5v-3h-2z"
-              />
-              <path
-                className="pixel-step-b"
-                d="M11 21h3v5h3v3h-6zM7 21h4v3H8v3H3v-3h4z"
-              />
-            </g>
-            <g className="pixel-seated">
-              <path d="M7 9h6v2h2v6h-2v2H7v-2H5v-6h2zM9 20h3v7h4v2H8v-2H7v-6h2zM5 21h2v8H4v-2h1zM14 29h3v5h3v2h-6z" />
-            </g>
-            <CompanionProps />
-          </svg>
-        </button>
+  useEffect(() => {
+    if (!spriteRef.current || !buttonRef.current || !captionRef.current || !edgeRef.current) return;
+    const elements = { sprite: spriteRef.current, button: buttonRef.current, caption: captionRef.current, state: clickState.current };
+    elements.button.disabled = elements.state.departed || elements.state.count >= 3;
+    if (!elements.state.departed && elements.state.count < 3) delete elements.sprite.dataset.interaction;
+    if (!enabled) return createFreeCompanionMotion(elements);
+    if (!speechRef.current) return;
+    return createReaderGuideMotion({ ...elements, bottomEdge: edgeRef.current, speech: speechRef.current, onSection: setSection });
+  }, [enabled]);
+
+  return <GuideContext.Provider value={{ enabled, requested, setRequested: requestGuide, start: startGuide, visitorName, section, overviewOpen }}>
+    {children}
+    <div ref={spriteRef} className="scroll-companion jose-moving-guide" data-guided={enabled} hidden data-pose="idle">
+      <button ref={buttonRef} type="button" className="companion-hitbox" aria-label={labels[locale].interact}><JoseSprite /></button>
+    </div>
+    <span ref={captionRef} className="companion-caption" role="status" aria-live="polite" aria-atomic="true" />
+    <span ref={edgeRef} className="jose-follow-edge" aria-hidden="true" hidden />
+    {enabled && <div ref={speechRef} className="jose-speech" aria-label={labels[locale].title} hidden>
+      <span className="jose-speech-name">José</span>
+      <button type="button" className="jose-speech-stop" aria-label={labels[locale].stop} onClick={() => requestGuide(false)}><span aria-hidden="true">×</span></button>
+      <div key={`${locale}-${stepKey}`} className="jose-speech-copy">
+        {section === "home" && <p className="jose-speech-hello">{labels[locale].hello(visitorName)}</p>}
+        <p>{step.message}</p>
+        <a href={`#${step.target}`} onClick={event => { event.preventDefault(); followGuide(step.target); }}>{step.action}<span aria-hidden="true"> →</span></a>
       </div>
-      <span
-        ref={captionRef}
-        className="companion-caption"
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      />
-    </>
-  );
+    </div>}
+  </GuideContext.Provider>;
 }

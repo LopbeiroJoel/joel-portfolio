@@ -5,6 +5,7 @@ import { useRef, useState, type CSSProperties } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import WindowControls from "@/components/ui/WindowControls";
 import type { Project } from "@/types";
+import { followGuide } from "@/lib/reader-guide";
 
 const copy = {
   fr: { detail: "Voir le détail", normal: "Vue standard", visit: "Voir le projet", source: "Code source" },
@@ -14,7 +15,7 @@ const copy = {
 type View = "compact" | "normal" | "expanded";
 
 export default function ProjectCaseStudy({ project, onHide }: { project: Project; onHide: () => void }) {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const content = project.content[locale];
   const labels = copy[locale];
   const [view, setView] = useState<View>("normal");
@@ -62,6 +63,15 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
           <h3 id={`${project.id}-title`} className="project-case-title">{project.title}<span className="accent">.</span></h3>
           {project.status && <p className="project-case-status">{project.status[locale]}</p>}
           {view === "normal" && <div className="project-case-summary"><p>{content.summary[0]}</p></div>}
+          {view !== "compact" && Boolean(project.acquiredSkills?.length) && <div className="project-acquired-skills">
+            <h4>{t("Compétences acquises sur ce projet")}</h4>
+            <ul aria-label={t("Compétences acquises sur ce projet")}>
+              {project.acquiredSkills!.map(skill => <li key={skill}>{t(skill)}</li>)}
+            </ul>
+            <a className="project-skills-overview" href="#skills-overview" onClick={event => {
+              event.preventDefault(); followGuide("skills-overview");
+            }}>{t("Voir toutes les étapes et leurs compétences")}<span aria-hidden="true"> →</span></a>
+          </div>}
           <button ref={toggleRef} type="button" className="project-case-toggle"
             aria-expanded={expanded} aria-controls={detailsId}
             aria-label={`${view === "normal" ? labels.detail : labels.normal} — ${project.title}`}

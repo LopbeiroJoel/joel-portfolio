@@ -20,6 +20,7 @@ import "./competency-groups.css";
 import "./window-controls.css";
 import "./visual-polish.css";
 import "./selected-refinements.css";
+import "./reader-guidance.css";
 import ScrollCompanion from "@/components/ui/ScrollCompanion";
 export const metadata: Metadata = {
   title: "Joel Lopes Ribeiro | Portfolio",
@@ -32,10 +33,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <LocaleProvider>
         <SkipLink />
+        <ScrollCompanion>
         <Header />
         {children}
         <Footer />
-        <ScrollCompanion />
+        </ScrollCompanion>
       </LocaleProvider>
       </body>
     </html>

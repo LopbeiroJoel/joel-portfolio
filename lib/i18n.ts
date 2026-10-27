@@ -3,6 +3,12 @@ import { education } from "@/data/education";
 export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
+  "Compétences acquises sur ce projet": ["Skills gained through this project", "Competências adquiridas com este projeto"],
+  "Voir toutes les étapes et leurs compétences": ["View every stage and its skills", "Ver todas as etapas e as respetivas competências"],
+  "Conception d’interfaces": ["Interface design", "Conceção de interfaces"],
+  "Analyse des besoins": ["Requirements analysis", "Análise de necessidades"],
+  "Organisation des données": ["Data organisation", "Organização de dados"],
+  "Logique applicative": ["Application logic", "Lógica aplicacional"],
   "Une double culture.": ["Two complementary perspectives.", "Uma dupla perspetiva."],
   "Métier & technique.": ["Business & technology.", "Negócio e tecnologia."],
   "À partir de janvier 2027": ["From January 2027", "A partir de janeiro de 2027"],

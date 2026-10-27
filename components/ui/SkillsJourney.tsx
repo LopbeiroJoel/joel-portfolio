@@ -8,7 +8,7 @@ import { journeyCopy, journeyNode, journeyStage } from "@/lib/skills-journey";
 export default function SkillsJourney() {
   const { locale, t } = useLocale();
   const copy = journeyCopy[locale];
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState(100);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [previewNode, setPreviewNode] = useState<string | null>(null);
   const highlighted = previewNode ?? selectedNode;
@@ -37,6 +37,17 @@ export default function SkillsJourney() {
 
   return (
     <div className="skills-journey">
+      <details className="sj-overview sj-overview-featured" id="skills-overview">
+        <summary>{copy.overview}<span aria-hidden="true">+</span></summary>
+        <div className="sj-overview-content">
+          {skillStages.map((stage, index) => <section key={stage.id} id={`skills-${stage.id}`} data-stage={stage.id} aria-labelledby={`skills-${stage.id}-title`}>
+            <h3 id={`skills-${stage.id}-title`}>{copy.titles[index]}</h3>
+            <p className="sj-overview-period">{copy.stages[index]} · {copy.periods[index]}</p>
+            <p>{copy.descriptions[index]}</p>
+            <dl>{stage.categories.map((group) => <div key={group.category}><dt>{t(group.category)}</dt><dd>{group.skills.map(t).join(" · ")}</dd></div>)}</dl>
+          </section>)}
+        </div>
+      </details>
       <div className="sj-heading">
         <label className="sj-instruction" htmlFor={`${id}-slider`}>
           <span aria-hidden="true">↔</span> {copy.hint}
@@ -141,17 +152,7 @@ export default function SkillsJourney() {
           <p className="sj-hover-hint">{copy.hover}</p>
         </div>
       </div>
-      <details className="sj-overview">
-        <summary>{copy.overview}<span aria-hidden="true">+</span></summary>
-        <div className="sj-overview-content">
-          {skillStages.map((stage, index) => <section key={stage.id} id={`skills-${stage.id}`} aria-labelledby={`skills-${stage.id}-title`}>
-            <h3 id={`skills-${stage.id}-title`}>{copy.titles[index]}</h3>
-            <p className="sj-overview-period">{copy.stages[index]} · {copy.periods[index]}</p>
-            <p>{copy.descriptions[index]}</p>
-            <dl>{stage.categories.map((group) => <div key={group.category}><dt>{t(group.category)}</dt><dd>{group.skills.map(t).join(" · ")}</dd></div>)}</dl>
-          </section>)}
-        </div>
-      </details>
+
     </div>
   );
 }

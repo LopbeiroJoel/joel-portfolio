@@ -2,6 +2,7 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useRef, useState, type FormEvent } from "react";
 import { contactEndpoint } from "@/data/contact";
+import { GuideNote } from "@/components/ui/ScrollCompanion";
 const configured = /^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(contactEndpoint);
 type Field = "name" | "email" | "subject" | "message";
 const fields: { name: Field; label: string; maxLength: number }[] = [
@@ -77,6 +78,7 @@ export default function ContactForm() {
       aria-describedby="form-notice"
       aria-busy={sending}
     >
+      <GuideNote section="contact" />
       <h3>{t("Parlons de votre projet.")}</h3>
       <p id="form-notice" className="form-notice">{t(configured
         ? "Tous les champs sont obligatoires. Le message est envoyé via Formspree."

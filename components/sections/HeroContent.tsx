@@ -2,6 +2,7 @@
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import Image from "next/image";
 import { profile } from "@/data/profile";
+import { GuideNote, GuidePreference } from "@/components/ui/ScrollCompanion";
 
 export default function HeroContent({ hasPhoto, hasCV }: { hasPhoto: boolean; hasCV: boolean }) {
   const { t } = useLocale();
@@ -37,6 +38,8 @@ export default function HeroContent({ hasPhoto, hasCV }: { hasPhoto: boolean; ha
             >{t("Télécharger mon CV")}<small aria-hidden="true">PDF ↓</small></a>
           )}
         </div>
+        <GuidePreference />
+        <GuideNote section="home" />
       </div>
       <div className="profile-panel">
         {hasPhoto ? (

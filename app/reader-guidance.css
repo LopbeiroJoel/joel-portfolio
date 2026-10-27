@@ -1,0 +1,90 @@
+/* Sélecteur : les langues gardent leurs noms accessibles au clavier et aux lecteurs d'écran. */
+.locale-selector button { display: grid; place-items: center; min-width: 36px; min-height: 32px; padding: 5px; }
+.language-flag { width: 24px; height: 16px; display: block; border-radius: 2px; box-shadow: 0 0 0 1px #00000012; }
+.locale-selector button[aria-pressed="true"] { border-width: 1px; border-color: var(--color-primary); }
+
+/* Objectifs explicitement futurs, reliés à leur utilisation concrète. */
+.skills-focus { margin-bottom: 24px; padding: 28px 30px; border-left: 2px solid var(--color-primary); background: var(--color-primary-subtle); border-radius: 0 10px 10px 0; }
+.skills-focus-period { font-size: 11px; color: var(--color-primary); }
+.skills-focus > h3 { margin: 10px 0; font-size: 24px; letter-spacing: -0.035em; }
+.skills-focus > p { max-width: 76ch; font-size: 13px; color: var(--color-text-secondary); }
+.skills-goals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 26px; }
+.skills-goals > div { padding-top: 18px; border-top: 1px solid var(--color-primary-light); }
+.skills-goals h4 { margin: 0 0 8px; font-size: 14px; }
+.skills-goals p { font-size: 12px; color: var(--color-text-secondary); }
+.skills-goals span { display: block; margin-top: 12px; font-size: 11px; color: var(--color-primary); }
+
+/* La lecture complète est proposée avant le graphique. */
+.sj-overview-featured { border-top: 0; border-bottom: 1px solid var(--color-border); }
+.sj-overview-featured > summary { min-height: 76px; padding: 22px 30px; background: var(--color-white); color: var(--color-primary); font-size: 16px; font-weight: 600; border-bottom: 2px solid var(--color-primary-light); }
+.sj-overview-featured > summary:hover { background: var(--color-primary-subtle); }
+.sj-overview-featured > summary > span { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border: 1px solid var(--color-primary-light); border-radius: 50%; }
+.sj-overview-featured .sj-overview-content { padding-top: 28px; }
+.sj-overview-content [data-stage="upcoming"] { padding-left: 18px; border-left: 2px solid var(--color-primary); }
+#skills-overview, #contact-name, #certifications-title, #interests-title { scroll-margin-top: 112px; scroll-margin-bottom: 180px; }
+
+/* Les compétences du projet sont visibles sans ouvrir le détail. */
+.project-acquired-skills { margin: 24px 0 22px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+.project-acquired-skills h4 { margin: 0 0 12px; font-size: 13px; }
+.project-acquired-skills ul { display: flex; flex-wrap: wrap; list-style: none; gap: 8px; padding: 0; }
+.project-acquired-skills li { padding: 5px 9px; border: 1px solid var(--color-border); border-radius: 5px; font-size: 11px; color: var(--color-text-secondary); }
+.project-skills-overview { display: inline-block; margin-top: 18px; padding: 10px 13px; border: 1px solid var(--color-primary-light); border-radius: 5px; font-size: 12px; font-weight: 600; text-decoration: none; }
+.project-skills-overview:hover { background: var(--color-primary-subtle); }
+
+/* La visite est un choix explicite. Au repos, José attend dans l’accueil. */
+.jose-guide-preference { margin-top: 28px; padding: 18px 20px; border: 1px solid var(--color-primary-light); border-left: 3px solid var(--color-primary); border-radius: 10px; background: var(--color-primary-subtle); color: var(--color-text); }
+.jose-guide-invite-title { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: var(--color-primary); }
+.jose-guide-preference label { display: flex; align-items: center; gap: 9px; font-size: 12px; cursor: pointer; }
+.jose-guide-preference input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--color-primary); cursor: pointer; }
+.jose-guide-hint { margin: 8px 0 0 27px; font-size: 11px; line-height: 1.6; color: var(--color-text-secondary); }
+.jose-name-form { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--color-primary-light); }
+.jose-name-form > p { margin: 0 0 12px; font-size: 13px; font-weight: 600; }
+.jose-name-form > label { font-size: 11px; }
+.jose-name-fields { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; margin-top: 6px; }
+.jose-name-fields input { min-width: 0; width: 100%; height: 40px; padding: 8px 10px; border: 1px solid var(--color-primary-light); border-radius: 5px; background: var(--color-white); font: inherit; font-size: 13px; }
+.jose-name-fields button { min-height: 40px; padding: 8px 12px; border: 1px solid var(--color-primary); border-radius: 5px; background: var(--color-primary); color: var(--color-white); font: inherit; font-size: 12px; cursor: pointer; }
+.jose-name-form small { display: block; margin-top: 9px; font-size: 10px; line-height: 1.5; color: var(--color-text-secondary); }
+
+/* Des repères dans la page réservent une place pour la petite bulle de José. */
+.jose-guide-note { max-width: 700px; min-height: 140px; margin: 44px 0 24px; border-top: 1px solid var(--color-primary-light); scroll-margin-top: 240px; }
+.jose-guide-note[data-current="true"] { border-top-color: var(--color-primary); }
+.contact-form > .jose-guide-note { margin-top: 12px; }
+
+.jose-speech { position: fixed; z-index: 14; width: min(270px, calc(100vw - 24px)); padding: 12px 14px; border: 1px solid var(--color-primary-light); border-radius: 10px; background: var(--color-white); color: var(--color-text); font-family: var(--font-body), sans-serif; box-shadow: 0 4px 16px #1a32200c; overflow-wrap: anywhere; }
+.jose-speech[hidden] { display: none; }
+.jose-speech::after { content: ""; position: absolute; left: var(--jose-tail, 20px); width: 8px; height: 8px; background: var(--color-white); transform: rotate(45deg); }
+.jose-speech[data-placement="below"]::after { top: -5px; border-top: 1px solid var(--color-primary-light); border-left: 1px solid var(--color-primary-light); }
+.jose-speech[data-placement="above"]::after { bottom: -5px; border-right: 1px solid var(--color-primary-light); border-bottom: 1px solid var(--color-primary-light); }
+.jose-speech-name { display: block; margin-bottom: 6px; color: var(--color-primary); font-size: 10px; font-weight: 600; }
+.jose-speech-copy { animation: jose-speech-in 160ms ease-out; }
+.jose-speech p { margin: 0; font-size: 12px; line-height: 1.5; }
+.jose-speech .jose-speech-hello { margin-bottom: 5px; font-weight: 600; }
+.jose-speech a { display: inline-block; margin-top: 9px; font-size: 11px; font-weight: 600; color: var(--color-primary); text-underline-offset: 3px; }
+.jose-speech-stop { position: absolute; top: 3px; right: 4px; width: 28px; height: 28px; border: 0; border-radius: 4px; background: transparent; color: var(--color-text-secondary); font: inherit; font-size: 17px; cursor: pointer; }
+.jose-speech-stop:hover { background: var(--color-primary-subtle); }
+@keyframes jose-speech-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Même personnage, même taille : marche sur les repères et petits sauts entre repères proches. */
+.jose-moving-guide[data-guided="true"] { z-index: 15; opacity: 0.85; }
+.jose-moving-guide[data-guided="true"][data-pose="idle"]:not([data-scene]) .pixel-arm-right { transform: rotate(-30deg); }
+.jose-follow-edge { position: fixed; bottom: 0; left: 0; right: 0; height: 1px; background: var(--color-primary-light); pointer-events: none; z-index: 12; }
+.jose-follow-edge[hidden] { display: none; }
+.jose-moving-guide[data-guided="true"] + .companion-caption { z-index: 16; }
+
+@media (max-width: 700px) {
+  .skills-focus { padding: 24px 20px; }
+  .skills-focus > h3 { font-size: 21px; }
+  .skills-goals { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .sj-overview-featured > summary { padding: 20px; font-size: 14px; }
+  .jose-guide-preference { padding: 17px 16px; }
+  .jose-name-fields { grid-template-columns: minmax(0, 1fr); }
+  .project-skills-overview { width: 100%; }
+}
+@media (max-width: 649px) {
+  .locale-selector button { min-width: 29px; padding-inline: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jose-moving-guide:not([hidden]) { display: block !important; }
+  .jose-moving-guide * { animation: none !important; }
+  .jose-speech-copy { animation: none; }
+}
