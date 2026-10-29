@@ -5,7 +5,6 @@ import { useRef, useState, type CSSProperties } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import WindowControls from "@/components/ui/WindowControls";
 import type { Project } from "@/types";
-import { followGuide } from "@/lib/reader-guide";
 
 const copy = {
   fr: { detail: "Voir le détail", normal: "Vue standard", visit: "Voir le projet", source: "Code source" },
@@ -68,9 +67,6 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
             <ul aria-label={t("Compétences acquises sur ce projet")}>
               {project.acquiredSkills!.map(skill => <li key={skill}>{t(skill)}</li>)}
             </ul>
-            <a className="project-skills-overview" href="#skills-overview" onClick={event => {
-              event.preventDefault(); followGuide("skills-overview");
-            }}>{t("Voir toutes les étapes et leurs compétences")}<span aria-hidden="true"> →</span></a>
           </div>}
           {view === "normal" && <p id={`${project.id}-details-hint`} className="project-case-hint">
             {t("Pour en savoir plus sur le projet et les compétences acquises, ouvrez le détail.")}

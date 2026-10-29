@@ -30,8 +30,6 @@
 .project-acquired-skills li { padding: 5px 9px; border: 1px solid var(--color-border); border-radius: 5px; font-size: 11px; color: var(--color-text-secondary); }
 .project-acquired-skills > ul li { color: var(--color-text); }
 .project-case-hint { margin: 18px 0 6px; font-size: 12px; line-height: 1.6; color: var(--color-text-secondary); }
-.project-skills-overview { display: inline-block; margin-top: 18px; padding: 10px 13px; border: 1px solid var(--color-primary-light); border-radius: 5px; font-size: 12px; font-weight: 600; text-decoration: none; }
-.project-skills-overview:hover { background: var(--color-primary-subtle); }
 
 /* La visite est un choix explicite. Au repos, José attend dans l’accueil. */
 .jose-guide-preference { margin-top: 28px; padding: 18px 20px; border: 1px solid var(--color-primary-light); border-left: 3px solid var(--color-primary); border-radius: 10px; background: var(--color-primary-subtle); color: var(--color-text); }
@@ -80,7 +78,6 @@
   .sj-overview-featured > summary { padding: 20px; font-size: 14px; }
   .jose-guide-preference { padding: 17px 16px; }
   .jose-name-fields { grid-template-columns: minmax(0, 1fr); }
-  .project-skills-overview { width: 100%; }
 }
 @media (max-width: 649px) {
   .locale-selector button { min-width: 29px; padding-inline: 3px; }
