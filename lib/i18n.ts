@@ -4,6 +4,8 @@ export type Locale = "fr" | "en" | "pt";
 type Pair = readonly [string, string];
 export const translations: Record<string, Pair> = {
   "Compétences acquises sur ce projet": ["Skills gained through this project", "Competências adquiridas com este projeto"],
+  "Outils et technologies utilisés": ["Tools and technologies used", "Ferramentas e tecnologias utilizadas"],
+  "Pour en savoir plus sur le projet et les compétences acquises, ouvrez le détail.": ["Open the project details to learn more about the project and the skills gained.", "Abra os detalhes do projeto para saber mais sobre o projeto e as competências adquiridas."],
   "Voir toutes les étapes et leurs compétences": ["View every stage and its skills", "Ver todas as etapas e as respetivas competências"],
   "Conception d’interfaces": ["Interface design", "Conceção de interfaces"],
   "Analyse des besoins": ["Requirements analysis", "Análise de necessidades"],

@@ -72,8 +72,12 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
               event.preventDefault(); followGuide("skills-overview");
             }}>{t("Voir toutes les étapes et leurs compétences")}<span aria-hidden="true"> →</span></a>
           </div>}
+          {view === "normal" && <p id={`${project.id}-details-hint`} className="project-case-hint">
+            {t("Pour en savoir plus sur le projet et les compétences acquises, ouvrez le détail.")}
+          </p>}
           <button ref={toggleRef} type="button" className="project-case-toggle"
             aria-expanded={expanded} aria-controls={detailsId}
+            aria-describedby={view === "normal" ? `${project.id}-details-hint` : undefined}
             aria-label={`${view === "normal" ? labels.detail : labels.normal} — ${project.title}`}
             onClick={() => view === "normal" ? setView("expanded") : normal()}>
             {view === "normal" ? labels.detail : labels.normal}<span aria-hidden="true">{view === "normal" ? "+" : "−"}</span>
@@ -89,6 +93,12 @@ export default function ProjectCaseStudy({ project, onHide }: { project: Project
               {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
             </div>)}
             {content.conclusion && <p className="project-case-conclusion">{content.conclusion}</p>}
+            {Boolean(project.secondaryTechnologies?.length) && <div className="project-case-topic">
+              <h4>{t("Outils et technologies utilisés")}</h4>
+              <ul className="project-case-technologies" aria-label={t("Outils et technologies utilisés")}>
+                {project.secondaryTechnologies!.map(technology => <li key={technology}>{technology}</li>)}
+              </ul>
+            </div>}
             {Boolean(project.technologies?.length) && <ul className="project-case-technologies" aria-label="Technologies">
               {project.technologies!.map(technology => <li key={technology}>{technology}</li>)}
             </ul>}

@@ -16,7 +16,16 @@ export const projects: Project[] = [
     },
     accentColor: "#126333",
     demoUrl: "https://mercasport-beta.vercel.app/profile.html",
-    acquiredSkills: ["Développement web", "Conception d’interfaces", "Analyse des besoins", "Organisation des données", "Logique applicative"],
+    acquiredSkills: ["HTML5", "CSS3", "JavaScript", "PostgreSQL", "Neon", "Vercel"],
+    secondaryTechnologies: [
+      "npm",
+      "pgAdmin 4",
+      "Argon2id / hash-wasm",
+      "bcryptjs / scrypt",
+      "Fetch API / JSON",
+      "SSE / EventSource",
+      "Python",
+    ],
     content: {
       fr: {
         summary: [

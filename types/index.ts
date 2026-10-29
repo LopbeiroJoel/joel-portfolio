@@ -59,6 +59,7 @@ export type Project = {
   >;
   technologies?: string[];
   acquiredSkills?: string[];
+  secondaryTechnologies?: string[];
   repositoryUrl?: string;
   demoUrl?: string;
 };
